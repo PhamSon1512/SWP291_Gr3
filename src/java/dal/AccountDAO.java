@@ -35,7 +35,7 @@ public class AccountDAO extends DBContext {
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Account s = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getInt(7), rs.getString(8));
+                Account s = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
                 return s;
             }
         } catch (SQLException ex) {
@@ -46,8 +46,9 @@ public class AccountDAO extends DBContext {
 
     public Account getAccountByEmail(String email) {
         Account account = null;
+        String sql = "SELECT * FROM account WHERE email = ?";
         try {
-            String sql = "SELECT * FROM account WHERE email = ?";
+
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
@@ -55,20 +56,19 @@ public class AccountDAO extends DBContext {
                 account = new Account(
                         rs.getInt("acc_ID"),
                         rs.getString("name"),
-                        rs.getString("phone_number"),
                         rs.getString("email"),
+                        rs.getString("phone_number"),
                         rs.getString("password"),
-                        rs.getBoolean("roleID"),
-                        rs.getInt("acc_status"),
-                        rs.getString("avatar_url")
-                );
+                        rs.getString("avatar_url"),
+                        rs.getInt("role_id"),
+                        rs.getInt("acc_status"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return account;
     }
-    
+
     public ArrayList<Account> listAcc() {
         ArrayList acc = new ArrayList();
 
@@ -77,7 +77,7 @@ public class AccountDAO extends DBContext {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Account s = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getInt(7), rs.getString(8));
+                Account s = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
                 acc.add(s);
 
             }
@@ -125,20 +125,25 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }*/
-
-     public void insertAccount(String name, String email, String phone_number, String password, int roleID, int acc_status,String avatar_url) {
+    public void insertAccount(String name, String email, String phone_number, String password, int roleID, int status) {
         int role = 0;
         try {
-            String sql = "INSERT INTO account"
-                    + " VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO [dbo].[account]\n"
+                    + "           ([name]\n"
+                    + "           ,[email]\n"
+                    + "           ,[phone_number]\n"
+                    + "           ,[password]\n"
+                    + "           ,[role_id]\n"
+                    + "           ,[acc_status])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, name);
             statement.setString(2, email);
             statement.setString(3, phone_number);
             statement.setString(4, password);
             statement.setInt(5, roleID);
-            statement.setInt(6, acc_status);
-            statement.setString(7, avatar_url);
+            statement.setInt(6, status);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,7 +162,7 @@ public class AccountDAO extends DBContext {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void changeInformations(String email, String name, String phone) {
         try {
             String sql = "UPDATE account\n"
@@ -171,7 +176,7 @@ public class AccountDAO extends DBContext {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void updatePasswordByEmail(String email, String newPassword) {
         try {
             String sql = "UPDATE account\n"
@@ -186,16 +191,24 @@ public class AccountDAO extends DBContext {
     }
 
     public void UpdateImage(int acc_ID, Part avatar_url) throws SQLException {
-        try {    
+        try {
             String sql = "UPDATE account\n "
-                + "SET avatar_url = '" + avatar_url
-                + "'WHERE acc_ID = '" + acc_ID + "'";
+                    + "SET avatar_url = '" + avatar_url
+                    + "'WHERE acc_ID = '" + acc_ID + "'";
             System.out.println(sql);
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeUpdate();
         } catch (SQLException e) {
-             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, e);
-        } 
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO();
+//        dao.insertAccount("hhh", "hh", "dd", "dd", 0, 0);
+
+        System.out.println(dao.getAccountByEmail("donpqhe172396@fpt.edu.vn"));
     }
 
     /*public List<Account> getFilterByRole(String role_id) throws SQLException, IOException {
@@ -392,7 +405,5 @@ public class AccountDAO extends DBContext {
         }
         return arr;
     }
-*/
+     */
 }
-
-
