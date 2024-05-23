@@ -28,7 +28,7 @@ public class CheckRegisterController extends HttpServlet {
         int role_id = 0;
         if (!password.equals(repassword)) {
 
-            request.setAttribute("error", "Passwords do not match!");
+            request.setAttribute("error", "Password do not match!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
 
         } else {
@@ -36,6 +36,7 @@ public class CheckRegisterController extends HttpServlet {
             AccountDAO adb = new AccountDAO();
             Account a = adb.getAccountByEmail(email);
             if (a == null) {
+                String encodedPassword = EncodeData.enCode(password);
                 adb.insertAccount(name, email, rphone, password, role_id, 0);
                 request.setAttribute("success", "Registration successful!");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
