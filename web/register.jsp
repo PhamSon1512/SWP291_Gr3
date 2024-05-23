@@ -22,7 +22,7 @@
     <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
     <!-- Css -->
     <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-    
+
     <style>
         .alert-fixed {
             position: fixed;
@@ -90,8 +90,8 @@
                                         successMessage.classList.add('alert-show');
                                         setTimeout(function() {
                                             successMessage.classList.remove('alert-show');
-                                            window.location.href = 'index.jsp';
-                                        }, 3000); // 3 seconds delay
+                                            window.location.href = 'homeAfter.jsp';
+                                        }, 2000); // 2 seconds delay
                                     });
                                 </script>
                             <%
@@ -125,11 +125,30 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Password <span class="text-danger">*</span></label>
-                                            <input type="password" class="form-control" placeholder="Password" name="password" required="">
-                                        </div>
-                                    </div>
+    <div class="mb-3">
+        <label class="form-label">Password <span class="text-danger">*</span></label>
+        <input type="password" 
+               oninvalid="CheckPassword(this);" 
+               oninput="CheckPassword(this);" 
+               value="${cookie.pass.value}" 
+               class="form-control" 
+               name="password" 
+               placeholder="Password" 
+               pattern="(?=.*[A-Z])(?=.*\W).{8,}" 
+               required>
+    </div>
+</div>
+
+<script>
+    function CheckPassword(input) {
+        const pattern = /^(?=.*[A-Z])(?=.*\W).{8,}$/;
+        if (!pattern.test(input.value)) {
+            input.setCustomValidity('Password must be at least 8 characters long and include at least one uppercase letter and one special character.');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+</script>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
