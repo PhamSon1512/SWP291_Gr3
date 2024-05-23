@@ -52,14 +52,14 @@ public class CheckLoginController extends HttpServlet {
         String password = request.getParameter("password");
 
         AccountDAO dal = new AccountDAO();
-        Account account = dal.getAccountByUP(email, password);
+        Account account = dal.getAccountByEmail(email);
 
         if (account == null) {
             request.setAttribute("email", email);
             request.setAttribute("password", password);
             request.setAttribute("loginError", "Email or Pasword is incorrect ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
+        } else if (account != null) {
             Cookie userCookies = new Cookie("email", email);
             Cookie passwordCookies = new Cookie("password", password);
             Cookie phoneCookies = new Cookie("phone", account.getPhone_number());
@@ -70,12 +70,17 @@ public class CheckLoginController extends HttpServlet {
             response.addCookie(passwordCookies);
             response.addCookie(phoneCookies);
 
-            if (account.getRoleID() == 0) {
+            if (account.getRoleID() == 1) {
                 response.sendRedirect("adminController");
             } else {
                 request.setAttribute("UserLogin", account.getName());
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("homeAfter.jsp");
             }
+        } else {
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+            request.setAttribute("loginError", "Email or Password is incorrect");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
