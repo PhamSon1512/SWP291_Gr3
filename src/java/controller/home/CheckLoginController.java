@@ -71,7 +71,7 @@ public class CheckLoginController extends HttpServlet {
             response.addCookie(phoneCookies);
 
             if (account.getRoleID() == 1) {
-                response.sendRedirect("adminController");
+                response.sendRedirect("AdminController.jsp");
             } else {
                 request.setAttribute("UserLogin", account.getName());
                 response.sendRedirect("homeAfter.jsp");
