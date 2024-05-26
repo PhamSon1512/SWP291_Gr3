@@ -22,6 +22,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script src="https://unpkg.com/feather-icons"></script>
 
         <style>
             .alert-fixed {
@@ -51,11 +52,17 @@
         <!-- Loader -->
 
         <div class="back-to-home rounded d-none d-sm-block">
-            <a href="index.jsp" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+            <a href="index.jsp" class="btn btn-icon btn-primary">
+                <i data-feather="home" class="icons"></i>
+            </a>
         </div>
 
+        <script>
+            feather.replace();
+        </script>
+
         <!-- Hero Start -->
-        <section class="bg-half-150 d-table w-100 bg-light" style="background: url('../assets/images/bg/bg-lines-one.png') center;">
+         <section class="bg-home d-flex bg-light align-items-center" style="background-image: url('assets/images/bg/fptu.jpg'); background-size: cover; background-position: center;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-8">
@@ -88,10 +95,7 @@
                                     document.addEventListener("DOMContentLoaded", function () {
                                         var successMessage = document.getElementById('successMessage');
                                         successMessage.classList.add('alert-show');
-                                        setTimeout(function () {
-                                            successMessage.classList.remove('alert-show');
-                                            window.location.href = 'login.jsp';
-                                        }, 2000); // 2 seconds delay
+                                        
                                     });
                                 </script>
                                 <%
