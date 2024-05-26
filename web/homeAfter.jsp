@@ -46,16 +46,10 @@
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <img src="<c:url value='assets/images/imgClub/img1.jpg' />" class="img-fluid" alt="">
                             <div class="card-body p-4">
-                                <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>30th December, 2022</li>
-                                    <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                </ul>
+                               
                                 <a href="blog-detail.html" class="text-dark title h5">🚩𝐄𝐓𝐇𝐈𝐂𝐀𝐋 𝐇𝐀𝐂𝐊𝐄𝐑𝐒 𝐂𝐋𝐔𝐁 𝐑𝐄𝐂𝐑𝐔𝐈𝐌𝐄𝐍𝐓 𝐆𝐄𝐍 𝟔🚩 EHC - CÂU LẠC BỘ AN TOÀN THÔNG TIN TUYỂN QUÂN</a>
                                 <div class="post-meta d-flex justify-content-between mt-3">
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                                        <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                                    </ul>
+                                    
                                     <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
                                 </div>
                             </div>
@@ -66,17 +60,11 @@
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <img src="<c:url value='assets/images/imgClub/img2.jpg' />" class="img-fluid" alt="">
                             <div class="card-body p-4">
-                                <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>14th May, 2024</li>
-                                    <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                </ul>
+                               
                                 <a href="blog-detail.html" class="text-dark title h5">FGC SHOW NHẠC KỊCH 2024 - ILLUMINATE
                                     ‼️Show nhạc kịch đình đám của FU Guitar Club chính thức quay trở lại.</a>
                                 <div class="post-meta d-flex justify-content-between mt-3">
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                                        <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                                    </ul>
+                                    
                                     <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
                                 </div>
                             </div>
@@ -87,17 +75,11 @@
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <img src="<c:url value='assets/images/imgClub/img3.jpg' />" class="img-fluid" alt="">
                             <div class="card-body p-4">
-                                <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                                    <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                </ul>
+                                
                                 <a href="blog-detail.html" class="text-dark title h5">[HỖ TRỢ TRUYỀN THÔNG]
                                     𝐈𝐍𝐓𝐄𝐑𝐍𝐀𝐓𝐈𝐎𝐍𝐀𝐋 𝐃𝐀𝐘 𝟐𝟎𝟐𝟒 | ONE TEAM, ONE DREAM</a>
                                 <div class="post-meta d-flex justify-content-between mt-3">
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                                        <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                                    </ul>
+                                    
                                     <a href="BlogDetail.jsp" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
                                 </div>
                             </div>
