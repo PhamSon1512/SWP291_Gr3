@@ -12,7 +12,7 @@
         <div class="container">
 
             <div>
-                <a class="logo" href="index.jsp">
+                <a class="logo" href="homeAfter.jsp">
                     <img src="assets/images/bg/fpt.png" height="50" class="l-light" alt="">
                     <img src="assets/images/bg/fpt.png" class="l-dark" height="50" alt="">
                 </a>
@@ -141,11 +141,11 @@
                     <li><a href="#" class="sub-menu-item">Blog</a></li>
                     
                         <c:if test="${sessionScope.user != null}">
-                    <li><a href="#" class="sub-menu-item">Register Club</a></li>
+                    <li><a href="registerclub.jsp" class="sub-menu-item">Register Club</a></li>
                         </c:if>
                     
                         <c:if test="${sessionScope.user == null}">
-                    <li><a href="login.jsp" class="sub-menu-item">Register Club</a></li>
+                    <li><a href="registerclub.jsp" class="sub-menu-item">Register Club</a></li>
                         </c:if>
                     <li><a href="contact.jsp" class="sub-menu-item">About us</a></li>
                 </ul>
