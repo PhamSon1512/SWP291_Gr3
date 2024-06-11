@@ -24,18 +24,7 @@ public class ForgotPassController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ForgotPassController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ForgotPassController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getRequestDispatcher("recover.jsp").forward(request, response);
     } 
 
     @Override
@@ -55,7 +44,7 @@ public class ForgotPassController extends HttpServlet {
         Account accounts = dao.getAccountsByEmail(email);
 
         if (accounts != null) {
-            request.getRequestDispatcher("").forward(request, response);
+            request.getRequestDispatcher("OTPMail.jsp").forward(request, response);
         } else {
             request.setAttribute("emailError", "Email not found");
             request.getRequestDispatcher("recover.jsp").forward(request, response);

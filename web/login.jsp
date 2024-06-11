@@ -22,7 +22,7 @@
                         </div>
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">  
-                                <h4 class="text-center">Đăng nhập</h4> 
+                                <h4 class="text-center">Login</h4> 
                                 <%
                                     Cookie[] cookies = request.getCookies();
                                     String emailValue = "";
@@ -63,16 +63,16 @@
                                                 <div class="mb-3">
                                                     <div class="form-check">
                                                         <input class="form-check-input align-middle" type="checkbox" name="remember" id="remember-check">
-                                                        <label class="form-check-label" for="remember-check">Lưu tài khoản</label>
+                                                        <label class="form-check-label" for="remember-check">Save account</label>
                                                     </div>
                                                 </div>
-                                                <a href="changepassword" class="text-dark h6 mb-0">Quên mật khẩu ?</a>
+                                                <a href="forgotpass" class="text-dark h6 mb-0">Forgot Password ?</a>
                                             </div>
                                         </div>
                                                 
                                         <div class="col-lg-12 mb-0">
                                             <div class="d-grid">
-                                                <button class="btn btn-primary" id="submit" type="submit">Đăng nhập</button>
+                                                <button class="btn btn-primary" id="submit" type="submit">Login</button>
                                             </div>
                                         </div>
                                                 
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Chưa có tài khoản ?</small> <a href="register" class="text-dark fw-bold">Đăng ký</a></p>
+                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Does not have account?</small> <a href="register" class="text-dark fw-bold">Sign up</a></p>
                                         </div>
                                     </div>
                                 </form>

@@ -26,7 +26,7 @@
                         </div>
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
-                                <h4 class="text-center">Khôi phục mật khẩu</h4>  
+                                <h4 class="text-center">Password Recovery</h4>  
                                 <p style="color: red; align-content: center;">
                                     ${requestScope.emailError}
                                 </p>
@@ -34,7 +34,7 @@
                                     <form action="forgotpass" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <p class="text-muted">Hãy nhập email của bạn, chúng tôi sẽ gửi mã OTP tới email để xác thực.</p>
+                                                <p class="text-muted">Please enter your email, we will send an OTP code to your email for authentication.</p>
                                                 <div class="mb-3">
                                                     <label class="form-label">Email <span class="text-danger">*</span></label>
                                                     <input value="${email}" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" type="email" class="form-control" name="email" required="">
@@ -43,11 +43,11 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="d-grid">
-                                                    <button id="submit" class="btn btn-primary">Xác nhận</button>
+                                                    <button id="submit" class="btn btn-primary">Submit</button>
                                                 </div>
                                             </div>
                                             <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><a href="checklogin" class="text-dark h6 mb-0">Đăng nhập</a></p>
+                                                <p class="mb-0 mt-3"><a href="checklogin" class="text-dark h6 mb-0">Login</a></p>
                                             </div>
                                         </div>
                                     </form> 
@@ -56,23 +56,23 @@
                                     <form action="user?action=forgot" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <p class="text-muted">Hãy nhập mật khẩu mới của bạn.</p>
+                                                <p class="text-muted">Please enter your new password.</p>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Mật khẩu mới : <span class="text-danger">*</span></label>
+                                                    <label class="form-label">New Password : <span class="text-danger">*</span></label>
                                                     <input value="${password}" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" type="password" id="password" class="form-control" name="password" required="">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Nhập lại mật khẩu : <span class="text-danger">*</span></label>
+                                                    <label class="form-label">Confirm New Password : <span class="text-danger">*</span></label>
                                                     <input value="${repassword}" oninvalid="CheckRePassword(this);" oninput="CheckRePassword(this);" type="password" class="form-control" name="repassword" required="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="d-grid">
-                                                    <button id="submit" class="btn btn-primary">Xác nhận</button>
+                                                    <button id="submit" class="btn btn-primary">Changes</button>
                                                 </div>
                                             </div>
                                             <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><a href="user?action=login" class="text-dark h6 mb-0">Đăng nhập</a></p>
+                                                <p class="mb-0 mt-3"><a href="user?action=login" class="text-dark h6 mb-0">Login</a></p>
                                             </div>
                                         </div>
                                     </form>
