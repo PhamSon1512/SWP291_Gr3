@@ -51,7 +51,7 @@ public class ValidateOTP extends HttpServlet {
         String otpClient = request.getParameter("otp");
         System.out.println(otpClient);
         if (otpClient.equals(otpSever)) {
-            response.sendRedirect("user?action=recoverpass");
+            response.sendRedirect("changePassword.jsp");
         } else {
             String errOtp = "OTP not correct";
             request.setAttribute("errOtp", errOtp);

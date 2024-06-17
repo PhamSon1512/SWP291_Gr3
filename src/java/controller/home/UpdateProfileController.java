@@ -15,7 +15,6 @@ import model.Account;
  * @author sodok
  */
 public class UpdateProfileController extends HttpServlet {
-
     Validate validate = new Validate();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -33,18 +32,21 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullname = request.getParameter("fullname");
+        String name = request.getParameter("fullname");
+        String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String username = request.getParameter("username");
-        String password = request.getParameter("oldpassword");
-        String newpass = request.getParameter("");
+        
+        request.setAttribute("fullname", name);
+        request.setAttribute("phone", phone);
+        request.setAttribute("username", username);
 
         AccountDAO dal = new AccountDAO();
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
-        
+
         boolean hasErrors = false;
-        if (!validate.checkFullName(fullname)) {
+        if (!validate.checkFullName(name)) {
             request.setAttribute("fullnameError", "Invalid full name. Please enter a valid name.");
             hasErrors = true;
         }
@@ -52,43 +54,10 @@ public class UpdateProfileController extends HttpServlet {
             request.setAttribute("phoneNumberError", "Invalid phone number. Please enter a valid 10-digit phone number.");
             hasErrors = true;
         }
-        if (!validate.checkUsername(username)) {
-            request.setAttribute("userNameError", "Invalid phone number. Please enter a valid 10-digit phone number.");
+        if(!validate.checkUsername(username)){
+            request.setAttribute("usernameError", "Invalid username. Please enter a valid username");
             hasErrors = true;
         }
-        if (!validate.checkPassword(password)) {
-            request.setAttribute("passwordError", "Invalid password. Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a digit.");
-            hasErrors = true;
-        }
-        
-        if (account != null) {
-            // Update account information
-            int userId = account.getUser_id();  // Get the user_id of the logged-in user
-            dal.changeInformations(fullname, username, phone, userId);
-
-            account.setFullname(fullname);
-            account.setUsername(username);
-            account.setPhone_number(phone);
-
-            // Update account object in session
-            session.setAttribute("account", account);
-
-            // Update other session attributes if needed
-            session.setAttribute("fullname", fullname);
-            session.setAttribute("username", username);
-            session.setAttribute("phone", phone);
-
-            // Handle avatar URL
-            String avatarUrl = account.getAvatar_url();
-            if (avatarUrl == null || avatarUrl.isEmpty()) {
-                avatarUrl = "assets/images/avata.png";
-            }
-            session.setAttribute("avatar_url", avatarUrl);
-
-            request.setAttribute("success", "You have successfully changed your information!");
-        }
-
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     @Override

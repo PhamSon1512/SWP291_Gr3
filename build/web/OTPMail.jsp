@@ -47,11 +47,11 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="d-grid">
-                                                <button id="submit" class="btn btn-primary">Submit</button>
+                                                <button id="submit" class="btn btn-primary">Xác nhận</button>
                                             </div>
                                         </div>
                                         <div class="mx-auto">
-                                            <p class="mb-0 mt-3"><a href="user?action=login" class="text-dark h6 mb-0">Sign in</a></p>
+                                            <p class="mb-0 mt-3"><a href="user?action=login" class="text-dark h6 mb-0">Đăng nhập</a></p>
                                         </div>
                                     </div>
                                 </form>

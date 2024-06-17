@@ -10,7 +10,7 @@
     <jsp:include page="layout/head.jsp"/>
     <body>
         <div class="back-to-home rounded d-none d-sm-block">
-            <a href="home" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+            <a href="index.jsp" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
         </div>
 
         <!-- Hero Start -->
@@ -21,7 +21,7 @@
                         <img src="assets/images/svg/error.svg" class="img-fluid" alt="">
                         <h3 class="mb-4">Page Not Found</h3>
                         <p class="text-muted para-desc mx-auto">"It looks like your link is not available."</p>
-                        <a href="home" class="btn btn-primary mt-2">Back to Home</a>
+                        <a href="index.jsp" class="btn btn-primary mt-2">Back to Home</a>
                     </div>
                 </div>
             </div>

@@ -22,10 +22,22 @@
                         </div>
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">  
-                                <h4 class="text-center">Login</h4> 
-                                <c:set var="cookie" value="${pageContext.request.cookies}"/>
-                                
-                                <form action="user?action=checklogin" method="POST" onSubmit="document.getElementById('submit').disabled=true;">
+                                <h4 class="text-center">Đăng nhập</h4> 
+                                <%
+                                    Cookie[] cookies = request.getCookies();
+                                    String emailValue = "";
+                                    String passwordValue = "";
+                                    if (cookies != null) {
+                                        for (Cookie cookie : cookies) {
+                                            if (cookie.getName().equals("email")) {
+                                                emailValue = cookie.getValue();
+                                            } else if (cookie.getName().equals("password")) {
+                                                passwordValue = cookie.getValue();
+                                            }
+                                        }
+                                    }
+                                %>
+                                <form action="checklogin" method="POST" onSubmit="document.getElementById('rememberForm').submit();">
                                     <p style="color: red; align-content: center;">
                                         ${requestScope.loginError}
                                     </p>
@@ -33,7 +45,7 @@
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="email" id="email" class="form-control" placeholder="Email" name="email" value="${cookie.email.value}">
+                                                <input type="email" id="email" class="form-control" placeholder="Email" name="email" value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>">
                                                 <div id="emailError" class="text-danger" style="display: none;">Email must be filled out</div>
                                             </div>
                                         </div>
@@ -41,7 +53,7 @@
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" value="${cookie.pass.value}">
+                                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" value="<%= passwordValue %>">
                                                 <div id="passwordError" class="text-danger" style="display: none;">Password must be filled out</div>
                                             </div>
                                         </div>
@@ -50,28 +62,28 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="mb-3">
                                                     <div class="form-check">
-                                                        <input ${(cookie.rem.value eq 'ON')?"checked":""} class="form-check-input align-middle" type="checkbox" name="remember" id="remember-check">
-                                                        <label class="form-check-label" for="remember-check">Save account</label>
+                                                        <input class="form-check-input align-middle" type="checkbox" name="remember" id="remember-check">
+                                                        <label class="form-check-label" for="remember-check">Lưu tài khoản</label>
                                                     </div>
                                                 </div>
-                                                <a href="user?action=recover" class="text-dark h6 mb-0">Forgot Password ?</a>
+                                                <a href="changepassword" class="text-dark h6 mb-0">Quên mật khẩu ?</a>
                                             </div>
                                         </div>
                                                 
                                         <div class="col-lg-12 mb-0">
                                             <div class="d-grid">
-                                                <button class="btn btn-primary" id="submit" type="submit">Login</button>
+                                                <button class="btn btn-primary" id="submit" type="submit">Đăng nhập</button>
                                             </div>
                                         </div>
                                                 
-                                        <div class="col-12 mt-3">
+                                        <div class="col-6 mt-3">
                                             <div class="d-grid">
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email 
                                                    profile openid &redirect_uri=http://localhost:8080/Iter2/registerclub&response_type=code &client_id=754575437351-ll510639upa1os3lpv867iad3n9a1anr.apps.googleusercontent.com&approval_prompt=force" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Does not have account?</small> <a href="user?action=register" class="text-dark fw-bold">Sign up</a></p>
+                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Chưa có tài khoản ?</small> <a href="register" class="text-dark fw-bold">Đăng ký</a></p>
                                         </div>
                                     </div>
                                 </form>
@@ -81,6 +93,12 @@
                 </div>
             </div> 
         </section>
+
+        <form id="rememberForm" action="remember" method="POST">
+            <input type="hidden" name="email" value="${param.email}">
+            <input type="hidden" name="password" value="${param.password}">
+            <input type="hidden" name="remember" value="${param.remember}">
+        </form>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/feather.min.js"></script>

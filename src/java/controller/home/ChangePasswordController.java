@@ -1,6 +1,5 @@
 package controller.home;
 
-import config.Encode;
 import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +21,7 @@ public class ChangePasswordController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        request.getRequestDispatcher("profile.jsp.jsp").forward(request, response);
+        request.getRequestDispatcher("recover.jsp").forward(request, response);
     }
 
     @Override
@@ -41,24 +40,20 @@ public class ChangePasswordController extends HttpServlet {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
 
-        if (account != null) {
-            String decodedPassword = Encode.deCode(account.getPassword());
-            if (decodedPassword.equals(oldPassword)) {
-                if (newPassword.equals(confirmPassword)) {
-                    String encodedNewPassword = Encode.enCode(newPassword);
-                    AccountDAO accountDAO = new AccountDAO();
-                    accountDAO.updatePasswordByEmail(account.getEmail(), encodedNewPassword);
+        if (account != null && account.getPassword().equals(oldPassword)) {
+            if (newPassword.equals(confirmPassword)) {
+                AccountDAO accountDAO = new AccountDAO();
+                accountDAO.updatePasswordByEmail(account.getEmail(), newPassword);
 
-                    account.setPassword(encodedNewPassword);
-                    session.setAttribute("account", account);
+                account.setPassword(newPassword);
+                session.setAttribute("account", account);
 
-                    request.setAttribute("passsuccess", "You have successfully changed your password!");
-                } else {
-                    request.setAttribute("passerror", "New password does not match!");
-                }
+                request.setAttribute("passsuccess", "Bạn đã thay đổi mật khẩu thành công!");
             } else {
-                request.setAttribute("passerror", "Old password is incorrect!");
+                request.setAttribute("passerror", "Mật khẩu mới không khớp!");
             }
+        } else {
+            request.setAttribute("passerror", "Mật khẩu cũ không đúng!");
         }
 
         request.getRequestDispatcher("profile.jsp").forward(request, response);

@@ -50,8 +50,8 @@
                         } else {
                         %>
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-primary flex-grow-1 me-1 p-1" onclick="window.location.href = 'user?action=checklogin'">Login</button>
-                            <button class="btn btn-primary flex-grow-1 ms-1 p-1" onclick="window.location.href = 'user?action=register'">Sign Up</button>
+                            <button class="btn btn-primary flex-grow-1 me-1 p-1" onclick="window.location.href = 'checklogin'">Login</button>
+                            <button class="btn btn-primary flex-grow-1 ms-1 p-1" onclick="window.location.href = 'register'">Sign Up</button>
                         </div>
                         <%
                         }
@@ -76,11 +76,11 @@
                             %>
                             <a class="dropdown-item text-" href="updateprofile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-user align-middle h6"></i></span> Tài khoản của tôi</a>
                             <a class="dropdown-item text-" onclick="redirectToChangePassword()" href="javascript:void(0)"><span class="mb-0 d-inline-block me-1"><i class="uil uil-lock-alt align-middle h6"></i></span> Thay đổi mật khẩu</a>
-                            <a class="dropdown-item text-" href="user?action=logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Đăng xuất</a>
+                            <a class="dropdown-item text-" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Đăng xuất</a>
                                     <%
                                         } else {
                                     %>
-                            <a class="dropdown-item text-" href="user?action=checklogin"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-in-alt align-middle h6"></i></span> Đăng Nhập</a>
+                            <a class="dropdown-item text-" href="checklogin"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-in-alt align-middle h6"></i></span> Đăng Nhập</a>
                                     <%
                                         }
                                     %>
@@ -115,7 +115,7 @@
                     <li><a href=#" class="sub-menu-item"> Debate Club</a></li>
                 </ul>
                 </li>
-                <li><a href="blog" class="sub-menu-item">Blog</a></li>
+                <li><a href="blog.jsp" class="sub-menu-item">Blog</a></li>
 
                 <%
                        if (account != null) {
@@ -124,7 +124,7 @@
                     <%
                            } else {
                     %>
-                <li><a href="user?action=checklogin" class="sub-menu-item">Register Club</a></li>
+                <li><a href="checklogin" class="sub-menu-item">Register Club</a></li>
                     <% 
                         }
                     %>

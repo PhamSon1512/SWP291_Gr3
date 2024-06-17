@@ -5,21 +5,21 @@ import java.util.regex.Pattern;
 
 public class Validate {
 
-    public boolean checkPhone(String phone) {
+    public static boolean checkPhone(String phone) {
         String regex = "\\d{10}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(phone);
         return matcher.matches();
     }
 
-    public boolean checkUsername(String username) {
+    public static boolean checkUsername(String username) {
         String regex = "^[a-zA-Z0-9]([a-zA-Z0-9]+[_.])*[a-zA-Z0-9]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(username);
         return matcher.matches();
     }
 
-    public boolean checkEmail(String email) {
+    public static boolean checkEmail(String email) {
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -39,7 +39,7 @@ public class Validate {
 //        return capitalized.toString().trim();
 //    }
 
-   public boolean checkFullName(String fullname) {
+   public static boolean checkFullName(String fullname) {
     String regex = "^[\\p{L} ]+$";
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(fullname);
@@ -47,7 +47,7 @@ public class Validate {
 }
 
 
-    public boolean checkPassword(String password) {
+    public static boolean checkPassword(String password) {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);

@@ -22,29 +22,29 @@
                         </div>
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
-                                <h4 class="text-center">Password Recovery</h4>  
+                                <h4 class="text-center">Khôi phục mật khẩu</h4>  
                                 <p style="color: red; align-content: center;">
                                     ${requestScope.emailError}
                                 </p>
 
 
-                                <form action="user?action=checkmail" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
+                                <form action="forgotpass" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p class="text-muted">Please enter your email, we will send an OTP code to your email for authentication.</p>
+                                            <p class="text-muted">Hãy nhập email của bạn chúng tôi sẽ gửi mật khẩu mới vào email.</p>
                                             <div class="mb-3">
                                                 <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input value="${email}" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" type="email" class="form-control" name="email">
+                                                <input value="${email}" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" type="email" class="form-control" name="email" required="">
 
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="d-grid">
-                                                <button id="submit" class="btn btn-primary">Submit</button>
+                                                <button id="submit" class="btn btn-primary">Xác nhận</button>
                                             </div>
                                         </div>
-                                        <div class="col-12 text-center">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="user?action=login" class="text-dark fw-bold">Sign in</a></p>
+                                        <div class="mx-auto">
+                                            <p class="mb-0 mt-3"><a href="login.jsp" class="text-dark h6 mb-0">Đăng nhập</a></p>
                                         </div>
                                     </div>
                                 </form> 
