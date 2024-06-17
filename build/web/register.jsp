@@ -35,7 +35,7 @@
                                         successMessage.classList.add('alert-show');
                                         setTimeout(function () {
                                             successMessage.classList.remove('alert-show');
-                                            window.location.href = 'login.jsp';
+                                            window.location.href = 'user?action=login';
                                         }, 2000); // 2 seconds delay
                                     });
                                 </script>
@@ -43,7 +43,7 @@
                                     }
                                 %>
 
-                                <form action="register" class="login-form mt-4" method="post">
+                                <form action="user?action=checkregister" class="login-form mt-4" method="post">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
@@ -105,19 +105,14 @@
                                         <div class="col-lg-12 mt-3 text-center">
                                             <h6 class="text-muted">Or</h6>
                                         </div>
-                                        <div class="col-6 mt-3">
-                                            <div class="d-grid">
-                                                <a href="javascript:void(0)" class="btn btn-soft-primary"><i class="uil uil-facebook"></i> Facebook</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 mt-3">
+                                        <div class="col-12 mt-8">
                                             <div class="d-grid">
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email 
                                                    profile openid &redirect_uri=http://localhost:8080/Iter2/registerclub&response_type=code &client_id=754575437351-ll510639upa1os3lpv867iad3n9a1anr.apps.googleusercontent.com&approval_prompt=force" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
                                             </div>
                                         </div>
-                                        <div class="mx-auto">
-                                            <span class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="login.jsp" class="ms-auto">Sign in</a> </span>
+                                        <div class="col-12 text-center">
+                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="user?action=login" class="text-dark fw-bold">Sign in</a></p>
                                         </div>
                                     </div>
                                 </form>

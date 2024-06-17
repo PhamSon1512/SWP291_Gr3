@@ -30,6 +30,9 @@ public class AccountDAO extends DBContext {
 
     public Account getAccountByUP(String email, String password) {
         Account account = null;
+        if (email == null || password == null) {
+            return null;
+        }
         try {
             String sql = "SELECT u.[user_id], u.full_name, u.[user_name], u.email, u.phone_number, u.[password], u.setting_id, u.status, u.note "
                     + "FROM [user] u "
@@ -62,7 +65,7 @@ public class AccountDAO extends DBContext {
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) { // Kiểm tra nếu có kết quả
                 Setting setting = new Setting(rs.getInt("setting_id"), "", "", "", rs.getInt("status"));
                 int userId = rs.getInt("user_id");
                 String avatarUrl = getAvatarUrlByUserId(userId);

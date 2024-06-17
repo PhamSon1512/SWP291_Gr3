@@ -65,4 +65,17 @@ public class Setting {
     public void setStatus(int status) {
         this.status = status;
     }
+    
+    public String getStatusName() {
+        switch (status) {
+            case 0:
+                return "deactive";
+            case 1:
+                return "active";
+            case 2:
+                return "banned";
+            default:
+                return "unknown";
+        }
+    }
 }

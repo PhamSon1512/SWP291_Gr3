@@ -132,6 +132,9 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Full Name<span class="text-danger">*</span></label>
                                                 <input name="fullname" onvalid="CheckFullName(this);" oninput="CheckFullName(this);" value="<%= account.getFullname() %>" id="name" type="text" class="form-control">
+                                                <div id="fullnameError" class="text-danger">
+                                                    <%= request.getAttribute("fullnameError") != null ? request.getAttribute("fullnameError") : "" %>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -139,6 +142,9 @@
                                             <div class="mb-4">
                                                 <label class="form-label">User Name<span class="text-danger">*</span></label>
                                                 <input name="username" oninvalid="CheckUserName(this);" oninput="CheckUserName(this);" value="<%= account.getUsername() %>" id="username" type="text" class="form-control">
+                                                <div id="userNameError" class="text-danger">
+                                                    <%= request.getAttribute("userNameError") != null ? request.getAttribute("userNameError") : "" %>
+                                                </div>
                                             </div>                                                                               
                                         </div>
 
@@ -153,6 +159,9 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Phone Number<span class="text-danger">*</span></label>
                                                 <input name="phone" oninvalid="CheckPhone(this);" oninput="CheckPhone(this);" value="<%= account.getPhone_number() %>" id="number" type="text" class="form-control">
+                                                <div id="phoneNumberError" class="text-danger">
+                                                    <%= request.getAttribute("phoneNumberError") != null ? request.getAttribute("phoneNumberError") : "" %>
+                                                </div>
                                             </div>                                                                               
                                         </div>
 
@@ -200,6 +209,9 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Old Password :<span class="text-danger">*</span></label>
                                                 <input value="${oldpassword}" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" type="password"  name="oldpassword" class="form-control" required="">
+                                                <div id="passwordError" class="text-danger">
+                                                    <%= request.getAttribute("passwordError") != null ? request.getAttribute("passwordError") : "" %>
+                                                </div>
                                             </div>
                                         </div><!--end col-->
 
