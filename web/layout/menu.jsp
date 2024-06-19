@@ -115,7 +115,7 @@
                     <li><a href=#" class="sub-menu-item"> Debate Club</a></li>
                 </ul>
                 </li>
-                <li><a href="blog" class="sub-menu-item">Blog</a></li>
+                <li><a href="blog.jsp" class="sub-menu-item">Blog</a></li>
 
                 <%
                        if (account != null) {

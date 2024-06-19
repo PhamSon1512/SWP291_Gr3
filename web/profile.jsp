@@ -87,10 +87,10 @@
                         <h3 class="mb-0"></h3>
                         <div class="rounded shadow mt-4">
                             <div class="p-4 border-bottom">
-                                <h4 class="mb-0">User Profile</h4>
-                                <c:if test="${not empty success}">
-                                    <p style="color: blue;">${success}</p>
-                                </c:if>
+                                <h5 class="mb-0">User Information</h5>
+                                <p style="color: blue; align-content: center;">
+                                    ${requestScope.success}
+                                </p>
                             </div>
                             <div class="p-4">
                                 <form action="user?action=update_image" method="POST" enctype="multipart/form-data">
@@ -102,7 +102,7 @@
                                         <p style="color: red;">Update Fail: ${param.error}</p>
                                     </c:if>
                                     <div>
-                                        <p class="text-muted">Update Avatar</p>
+                                        <p class="text-muted">Update avatar.</p>
                                         <div id="myfileupload">
                                             <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
                                         </div>
@@ -130,21 +130,24 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Full Name<span class="text-danger">*</span></label>
-                                                <input name="fullname" onvalid="CheckFullName(this);" oninput="CheckFullName(this);" value="<%= account.getFullname() %>" id="name" type="text" class="form-control">
+                                                <input name="fullname" id="fullName" value="<%= account.getFullname() %>" type="text" class="form-control">
+                                                <div id="fullnameError" class="text-danger">
+                                                    <%= request.getAttribute("fullnameError") != null ? request.getAttribute("fullnameError") : "" %>
+                                                </div>
                                             </div>
                                         </div>
-
+                                            
                                         <div class="col-md-6">
                                             <div class="mb-4">
-                                                <label class="form-label">User Name<span class="text-danger">*</span></label>
-                                                <input name="username" oninvalid="CheckUserName(this);" oninput="CheckUserName(this);" value="<%= account.getUsername() %>" id="username" type="text" class="form-control">
+                                                <label class="form-label">Username<span class="text-danger">*</span></label>
+                                                <input name="phone" oninvalid="CheckPhone(this);" oninput="CheckPhone(this);" value="<%= account.getUsername() %>" id="number" type="text" class="form-control">
                                             </div>                                                                               
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Email<span class="text-danger">*</span></label>
-                                                <input name="email" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" value="<%= account.getEmail() %>" id="email" type="email" class="form-control" readonly>
+                                                <input name="email" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" value="<%= account.getEmail() %>" id="email" type="email" class="form-control">
                                             </div>
                                         </div>
 
@@ -154,21 +157,11 @@
                                                 <input name="phone" oninvalid="CheckPhone(this);" oninput="CheckPhone(this);" value="<%= account.getPhone_number() %>" id="number" type="text" class="form-control">
                                             </div>                                                                               
                                         </div>
-
+                                            
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Role<span class="text-danger">*</span></label>
-                                                <c:choose>
-                                                    <c:when test="${account.getStatus() == 0}">
-                                                        <input name="role" value="User" id="role" type="text" class="form-control" readonly>
-                                                    </c:when>
-                                                    <c:when test="${account.getStatus() == 1}">
-                                                        <input name="role" value="Admin" id="role" type="text" class="form-control" readonly>
-                                                    </c:when>
-                                                    <c:when test="${account.getStatus() == 2}">
-                                                        <input name="role" value="Manager" id="role" type="text" class="form-control" readonly>
-                                                    </c:when>
-                                                </c:choose>
+                                                <input name="username"  value="<%= account.getStatus() %>" type="text" class="form-control">
                                             </div>                                                                               
                                         </div>
                                     </div>        
@@ -183,7 +176,7 @@
 
                         <div id="changePasswordSection" class="rounded shadow mt-4">
                             <div class="p-4 border-bottom">
-                                <h5 class="mb-0">Changes Password :</h5>
+                                <h5 class="mb-0">Đổi mật khẩu :</h5>
                                 <p style="color: red; align-content: center;">
                                     ${requestScope.passerror}
                                 </p>
@@ -197,27 +190,27 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Old Password :<span class="text-danger">*</span></label>
+                                                <label class="form-label">Mật khẩu cũ :<span class="text-danger">*</span></label>
                                                 <input value="${oldpassword}" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" type="password"  name="oldpassword" class="form-control" required="">
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">New Password :<span class="text-danger">*</span></label>
+                                                <label class="form-label">Mật khẩu mới :<span class="text-danger">*</span></label>
                                                 <input value="${newpassword}" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" id="password" type="password" name="newpassword" class="form-control" required="">
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Confirm New Password :<span class="text-danger">*</span></label>
-                                                <input value="${renewpassword}" oninvalid="CheckRePassword(this);" oninput="CheckRePassword(this);" type="password" name="renewpassword" class="form-control" required="">
+                                                <label class="form-label">Nhập lại mật khẩu :<span class="text-danger">*</span></label>
+                                                <input value="${renewpassword}" oninvalid="CheckRePassword(this);" oninput="CheckRePassword(this);"type="password" name="renewpassword" class="form-control" required="">
                                             </div>
                                         </div>
                                         <!--end col-->
                                         <div class="col-lg-12 mt-2 mb-0">
-                                            <button class="btn btn-primary">Changes</button>
+                                            <button class="btn btn-primary">Thay đổi</button>
                                         </div>
                                     </div>
                                 </form>

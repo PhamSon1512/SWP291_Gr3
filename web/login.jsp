@@ -51,7 +51,7 @@
                                                 <div class="mb-3">
                                                     <div class="form-check">
                                                         <input class="form-check-input align-middle" type="checkbox" name="remember" id="remember-check">
-                                                        <label class="form-check-label" for="remember-check">Save account</label>
+                                                        <label class="form-check-label" for="remember-check">Lưu tài khoản</label>
                                                     </div>
                                                 </div>
                                                 <a href="user?action=forgotpass" class="text-dark h6 mb-0">Forgot Password ?</a>
@@ -60,7 +60,7 @@
 
                                         <div class="col-lg-12 mb-0">
                                             <div class="d-grid">
-                                                <button class="btn btn-primary" id="submit" type="submit">Login</button>
+                                                <button class="btn btn-primary" id="submit" type="submit">Đăng nhập</button>
                                             </div>
                                         </div>
 
