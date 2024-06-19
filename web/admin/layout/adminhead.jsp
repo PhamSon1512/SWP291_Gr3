@@ -26,15 +26,17 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <style>
         @media not all and (min-resolution:.001dpcm)
-        { @supports (-webkit-appearance:none) {
+        {
+            @supports (-webkit-appearance:none) {
 
-              .safari_only { 
+                .safari_only {
 
-                  color:#0000FF; 
-                  background-color:#CCCCCC; 
+                    color:#0000FF;
+                    background-color:#CCCCCC;
 
-              }
-          }}
+                }
+            }
+        }
     </style>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <script type="text/javascript">

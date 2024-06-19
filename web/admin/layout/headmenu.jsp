@@ -1,33 +1,17 @@
-<%-- 
-    Document   : menu_white
-    Created on : Feb 22, 2022, 4:57:52 PM
-    Author     : Khuong Hung
---%>
 
 <%@page import="model.Account, dal.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header id="topnav" class="navigation sticky">
-    <div class="container">
+
+<div class="top-header">
+    <div class="header-bar d-flex justify-content-between border-bottom">
         <div>
-            <a class="logo" href="home">
+            <a class="logo" href="dashboard?action=home">
                 <img src="assets/images/bg/fpt.png" height="50" class="l-light" alt="">
-                <img src="assets/images/bg/fpt.png" class="l-dark" height="50" alt="">
             </a>
         </div>
 
-        <div class="menu-extras">
-            <div class="menu-item">
-                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <ul class="dropdowns list-inline mb-0">
+        <ul class="list-unstyled mb-0">
             <li class="list-inline-item mb-0 ms-1">
                 <div class="dropdown dropdown-primary">
                     <%
@@ -84,21 +68,5 @@
                 </div>
             </li>
         </ul>
-
-        <script>
-            function redirectToChangePassword() {
-                window.location.href = 'user?action=profile#changePasswordSection';
-            }
-        </script>            
-
-        <script>
-            window.onscroll = function () {
-                var header = document.getElementById("topnav");
-                if (window.pageYOffset > 0) {
-                    header.style.display = "none";
-                } else {
-                    header.style.display = "block";
-                }
-            };
-        </script>
-</header>
+    </div>
+</div>

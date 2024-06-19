@@ -14,28 +14,34 @@
             <br><br><br><br>
             <c:choose>
                 <c:when test="${empty sessionScope.account.avatar_url}">
-                    <img src="assets/images/avata.png" class="rounded-circle shadow-md avatar avatar-medium" alt="${sessionScope.user.name}">
+                    <img src="assets/images/avata.png" class="rounded-circle shadow-md avatar avatar-medium" alt="${sessionScope.account.fullname}">
                 </c:when>
                 <c:otherwise>
-                    <img src="${sessionScope.account.avatar_url}" class="rounded-circle shadow-md avatar avatar-medium" alt="${sessionScope.user.name}">
+                    <img src="${sessionScope.account.avatar_url}" class="rounded-circle shadow-md avatar avatar-medium" alt="${sessionScope.account.fullname}">
                 </c:otherwise>
             </c:choose>
 
-            <h5 class="mt-3 mb-1">${sessionScope.user.name}</h5>
-            <p class="text-muted mb-0">${sessionScope.user.username}</p>
+            <h5 class="mt-3 mb-1">${sessionScope.account.username}</h5>
+            <p class="text-muted mb-0">${sessionScope.account.email}</p>
         </div>
 
         <ul class="list-unstyled sidebar-nav mb-0">
-            <li class="navbar-item"><a href="user?action=profile" class="navbar-link"><i class="ri-airplay-line align-middle navbar-icon"></i> Dashboard</a></li>
-                <c:if test="${sessionScope.user.role.role_id == 3}">
-                <li class="navbar-item"><a href="doctor?action=myfeedback" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Phản hồi</a></li>
-                <li class="navbar-item"><a href="doctor?action=mypatient" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Bệnh nhân của tôi</a></li>
-                <li class="navbar-item"><a href="doctor?action=myappointment" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Lịch hẹn</a></li>
-                </c:if>
-                <c:if test="${sessionScope.user.role.role_id == 2}">
-                <li class="navbar-item"><a href="user?action=history&type=appointment" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Lịch sử đặt lịch</a></li>
-                <li class="navbar-item"><a href="user?action=history&type=reservation" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Lịch sử dịch vụ</a></li>
-                </c:if>
+            <li class="navbar-item">
+                <c:choose>
+                    <c:when test="${sessionScope.account.status == 0}">
+                        <a href="dashboard?action=user" class="navbar-link"><i class="ri-airplay-line align-middle navbar-icon"></i>User Dashboard</a>
+                    </c:when>
+                    <c:when test="${sessionScope.account.status == 1}">
+                        <a href="dashboard?action=admin" class="navbar-link"><i class="ri-airplay-line align-middle navbar-icon"></i>Admin Dashboard</a>
+                    </c:when>
+                    <c:when test="${sessionScope.account.status== 2}">
+                        <a href="dashboard?action=manager" class="navbar-link"><i class="ri-airplay-line align-middle navbar-icon"></i>Manager Dashboard</a>
+                    </c:when>
+                    <c:otherwise>
+                        <% response.sendRedirect("../401.jsp"); %>
+                    </c:otherwise>
+                </c:choose>
+            </li>   
         </ul>
     </div>
 </div>

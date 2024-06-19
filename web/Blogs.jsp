@@ -1,341 +1,206 @@
 <%-- 
-    Document   : Blogs
-    Created on : May 30, 2024, 11:14:10 AM
-    Author     : sodok
+    Document   : blog
+    Created on : Jun 12, 2024, 10:35:22 PM
+    Author     : FANCY
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="model.Blog" %>
+<%@ page import="dal.BlogDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
+
+<%
+    int postsPerPage = 6; // Số bài viết trên mỗi trang
+    int maxPagesDisplayed = 5; // Số trang tối đa được hiển thị
+%>
+<%
+    BlogDAO blogDAO = new BlogDAO();
+    List<Blog> allBlogs = blogDAO.getAllBlogs(); // Lấy danh sách tất cả các bài viết từ DAO
+
+    int totalPosts = allBlogs.size(); // Tổng số bài viết
+
+    // Xác định trang hiện tại từ tham số truyền lên
+    int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+
+    // Tính chỉ số bắt đầu và kết thúc của danh sách bài viết trên trang hiện tại
+    int startIndex = (currentPage - 1) * postsPerPage;
+    int endIndex = Math.min(startIndex + postsPerPage, totalPosts);
+
+    // Lấy danh sách bài viết cho trang hiện tại
+    List<Blog> displayedBlogs = allBlogs.subList(startIndex, endIndex);
+%>
 <!DOCTYPE html>
+<jsp:include page="layout/head.jsp"/>
+<jsp:include page="layout/menu.jsp"/>
 <html lang="en">
-    <jsp:include page="layout/head.jsp"/>
-    <body>
-        <jsp:include page="layout/preloader.jsp"/>
 
-        <jsp:include page="layout/menu.jsp"/>
-
-        <!-- Start Hero -->
-        <!DOCTYPE html>
-<html lang="en">
     <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Các liên kết khác -->
-</head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .bg-half-260 {
-            position: relative;
-            height: 100vh;
-            display: table;
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .bg-overlay {
-            background-color: rgba(0, 0, 0, 0.5); /* Điều chỉnh độ mờ */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .text-white {
-            color: #fff !important;
-        }
-
-        .font-weight-bold {
-            font-weight: 700 !important;
-        }
-
-        .arrow-down {
-            display: inline-block;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            animation: blink 1s infinite;
-        }
-
-        .arrow-down:hover {
-            transform: translateY(5px);
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
+        <style>
+            body {
+                background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
+                font-family: 'Poppins', sans-serif;
+                color: #333;
             }
-            50% {
-                opacity: 0;
+            .navbar {
+                position: fixed;
+                width: 100%;
+                z-index: 1000;
             }
-        }
-    </style>
-</head>
-<body>
-    <section class="bg-half-260 d-table w-100" style="background: url('assets/images/imgClub/img4.jpg') center/cover; position: relative;">
-        <div class="bg-overlay"></div>
-        <div class="container position-relative" style="z-index: 1;">
-            <div class="row mt-5 mt-lg-0">
-                <div class="col-12 text-center">
-                    <h1 class="text-white font-weight-bold">Welcome to Our Blogs</h1>
-                    <p class="text-white mt-3">Discover the best activities and join us for an unforgettable experience.</p>
-                    <h1 class="text-white font-weight-bold">Discover Hot News</h1>
-                    <a href="#blogSection" class="arrow-down mt-4">
-                        <i class="fas fa-chevron-down fa-2x text-white"></i>
-                    </a>
+            .container {
+                margin-top: 0px;
+            }
+            .header-title {
+                text-align: center;
+                font-size: 3rem; /* Tăng kích cỡ font lên một chút */
+                font-weight: 900; /* Tăng độ đậm của font */
+                margin-bottom: 2rem;
+                color: #fff;
+                margin-top: 100px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Đổ bóng chữ */
+            }
+            .row{
+                margin-top: 30px
+            }
+
+            .card {
+                border: none;
+                border-radius: 20px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            .card-img-top {
+                height: 250px;
+                object-fit: cover;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+            .card-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #495057;
+            }
+            .card-text {
+                color: #6c757d;
+                font-size: 1rem;
+            }
+            .btn-primary {
+                background-color: #0069d9;
+                border-color: #0062cc;
+            }
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+            #back-to-top {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                display: none;
+                z-index: 100;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="header-title">Club Blog</div>
+
+
+            <!-- Form tìm kiếm -->
+            <div class="row mt-4">
+                <div class="col-md-6 offset-md-3">
+                    <form action="blog" method="GET" class="d-flex">
+                        <input class="form-control me-2" type="search" name="keyword" placeholder="Search blogs..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
                 </div>
+            </div>
+
+
+            <% 
+          String keyword = request.getParameter("keyword");
+          List<Blog> searchResults = new ArrayList<>();
+
+          if (keyword != null && !keyword.isEmpty()) {
+              // Lọc danh sách bài viết theo từ khóa
+              for (Blog blog : allBlogs) {
+                  if (blog.getTitle().toLowerCase().contains(keyword.toLowerCase()) || 
+                      blog.getContent().toLowerCase().contains(keyword.toLowerCase())) {
+                      searchResults.add(blog);
+                  }
+              }
+          } else {
+              searchResults = allBlogs; // Nếu không có từ khóa, hiển thị tất cả bài viết
+          }
+
+          // Cập nhật danh sách bài viết hiển thị
+          totalPosts = searchResults.size();
+          currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+          startIndex = (currentPage - 1) * postsPerPage;
+          endIndex = Math.min(startIndex + postsPerPage, totalPosts);
+          displayedBlogs = searchResults.subList(startIndex, endIndex);
+            %>
+
+            <div class="row">
+                <% for (Blog blog : displayedBlogs) { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="<%= blog.getThumbnailUrl() %>" alt="Blog image">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= blog.getTitle() %></h5>
+                            <p class="card-text"><%= blog.getContent().length() > 100 ? blog.getContent().substring(0, 100) + "..." : blog.getContent() %></p>
+                            <a href="blogDetails.jsp?id=<%= blog.getBlogId() %>" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+
+            <!-- Phân trang -->
+            <div class="pagination justify-content-center mt-4">
+                <%-- Nút Previous --%>
+                <% if (currentPage > 1) { %>
+                <a class="btn btn-primary me-2" href="blog?page=<%= currentPage - 1 %>">Previous</a>
+                <% } %>
+
+                <%-- Các nút trang --%>
+                <% 
+                    int startPage = Math.max(1, currentPage - maxPagesDisplayed / 2);
+                    int endPage = Math.min(startPage + maxPagesDisplayed - 1, (int) Math.ceil((double) totalPosts / postsPerPage));
+
+                    for (int i = startPage; i <= endPage; i++) { 
+                %>
+                <a class="btn btn-primary me-2 <%= (i == currentPage) ? "active" : "" %>" href="blog?page=<%= i %>"><%= i %></a>
+                <% } %>
+
+                <%-- Nút Next --%>
+                <% if (currentPage < (int) Math.ceil((double) totalPosts / postsPerPage)) { %>
+                <a class="btn btn-primary" href="blog?page=<%= currentPage + 1 %>">Next</a>
+                <% } %>
             </div>
         </div>
-    </section>
-
-    <!-- Phần blog bên dưới -->
-    <section id="blogSection">
-        <!-- Nội dung blog -->
-    </section>
-
-    <script>
-        document.querySelector('.arrow-down').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#blogSection').scrollIntoView({ behavior: 'smooth' });
-        });
-    </script>
-</body>
-</html>
 
 
-
-<!-- Phần blog bên dưới -->
-<section id="blogSection">
-    <!-- Nội dung blog -->
-    <section class="section">
-            <div class="container mt-100 mt-60">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="section-title">
-                <h4 class="title mb-0">Blog List:</h4>
-            </div>
-        </div><!--end col-->
-    </div><!--end row-->
-
-    <div class="row mt-4 pt-2">
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/imgClub/img1.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">medicine research course for doctors</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/imgClub/img2.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">Comparing Nitrogen And Mechanical Freezers</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/imgClub/img3.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">It Is Very Important To Wear Proper Clothing</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/feedback/chien.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">Hollowed-Out Faces More Cuts Amid Virus</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/feedback/don.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">A Researcher Is Research On Coronavirus In Lab</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-        
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/feedback/manh.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">A Researcher Is Research On Coronavirus In Lab</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/feedback/son.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">A Researcher Is Research On Coronavirus In Lab</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/feedback/tien.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">A Researcher Is Research On Coronavirus In Lab</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                <img src="assets/images/feedback/chutich.jpg" class="img-fluid" alt="">
-                <div class="card-body p-4">
-                    <ul class="list-unstyled mb-2">
-                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                    </ul>
-                    <a href="blog-detail.html" class="text-dark title h5">A Researcher Is Research On Coronavirus In Lab</a>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                        <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                        </ul>
-                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div><!--end row-->
-</div><!--end container-->
-        </section>
-</section>
-
-
-</body>
-</html>
-
-
-</html>
-
-        
-        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 
         <jsp:include page="layout/footer.jsp"/>
 
-        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i class="fas fa-arrow-up"></i></a>
 
         <jsp:include page="layout/search.jsp"/>
-
-        <jsp:include page="layout/facebookchat.jsp"/>
         <div class="modal fade" id="watchvideomodal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content video-modal rounded overflow-hidden">
@@ -347,12 +212,26 @@
         </div>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/tiny-slider.js "></script>
-        <script src="assets/js/tiny-slider-init.js "></script>
-        <script src="assets/js/counter.init.js "></script>
+        <script src="assets/js/tiny-slider.js"></script>
+        <script src="assets/js/tiny-slider-init.js"></script>
+        <script src="assets/js/counter.init.js"></script>
         <script src="assets/js/feather.min.js"></script>
         <script src="assets/js/app.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('#back-to-top').fadeIn();
+                    } else {
+                        $('#back-to-top').fadeOut();
+                    }
+                });
+                $('#back-to-top').click(function () {
+                    $('html, body').animate({scrollTop: 0}, 800);
+                    return false;
+                });
+            });
+        </script>
     </body>
-
 </html>
-

@@ -93,7 +93,7 @@
                                 </c:if>
                             </div>
                             <div class="p-4">
-                                <form action="update_image" method="POST" enctype="multipart/form-data">
+                                <form action="user?action=update_image" method="POST" enctype="multipart/form-data">
                                     <h5 class="mb-0">Changes Information :</h5>
                                     <c:if test="${param.success == 'true'}">
                                         <p style="color: blue;">Update Success</p>
@@ -111,10 +111,9 @@
                                             <a class="removeimg" href="javascript:"></a>
                                         </div>
                                         <div id="boxchoice">
-                                            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Choose images</a>
+                                            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Choose image</a>
                                             <p style="clear:both"></p>
-                                            <input type="submit" id="submit" style="display: none" name="send" class="Update btn btn-primary"
-                                                   value="Cập nhật">
+                                            <input type="submit" id="submit" style="display: none" name="send" class="Update btn btn-primary" value="Changes">
                                             <p style="clear:both"></p>
                                         </div> 
                                     </div>
@@ -126,7 +125,7 @@
                                     }
                                     if (account != null) {
                                 %>            
-                                <form action="updateprofile" method="POST">
+                                <form action="user?action=update_profile" method="POST">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-4">
@@ -194,7 +193,7 @@
                             </div>
 
                             <div class="p-4">
-                                <form action="changepassword" method="POST">
+                                <form action="user?action=changepassword" method="POST">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
@@ -236,7 +235,6 @@
         <jsp:include page="layout/footer.jsp"/>
         <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
             <jsp:include page="layout/search.jsp"/>
-            <jsp:include page="layout/facebookchat.jsp"/>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/feather.min.js"></script>
