@@ -49,12 +49,21 @@
         <servlet-class>controller.home.SearchController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>BlogOfClubDetails</servlet-name>
         <servlet-class>controller.home.BlogOfClubDetails</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BlogListOfClub</servlet-name>
         <servlet-class>controller.home.BlogListOfClub</servlet-class>
+=======
+        <servlet-name>UploadImage</servlet-name>
+        <servlet-class>controller.home.UploadImage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListImages</servlet-name>
+        <servlet-class>controller.home.ListImages</servlet-class>
+>>>>>>> 0fb2a04c3175a308897c6b91cac6d02db0217055
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -111,5 +120,11 @@
     <servlet-mapping>
         <servlet-name>BlogListOfClub</servlet-name>
         <url-pattern>/BlogListOfClub</url-pattern>
+        <servlet-name>UploadImage</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListImages</servlet-name>
+        <url-pattern>/list</url-pattern>
     </servlet-mapping>
 </web-app>

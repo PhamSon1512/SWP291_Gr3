@@ -16,7 +16,7 @@
         font-family: 'Poppins', sans-serif;
         color: #333;
     }
-
+    
 </style>
 <html lang="en">
     <jsp:include page="layout/head.jsp"/>
@@ -29,8 +29,7 @@
             </a>
         </div>
 
-
-        <section class="py-5" style="margin-top: -100px;">
+                <section class="py-5" style="margin-top: -100px;">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <h1 class="display-5 fw-bolder text-center my-5" style="color: white;">${clubId.name}</h1>
@@ -151,5 +150,4 @@
     <script src="assets/js/feather.min.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
-
 </html>
