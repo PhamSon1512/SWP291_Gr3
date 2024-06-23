@@ -16,6 +16,7 @@
         font-family: 'Poppins', sans-serif;
         color: #333;
     }
+<<<<<<< HEAD
     .card {
         height: 100%;
     }
@@ -39,6 +40,9 @@
         -webkit-line-clamp: 3; /* Số dòng hiển thị của nội dung */
         -webkit-box-orient: vertical;
     }
+=======
+    
+>>>>>>> 1098dc0d320dce49c03b8bcf6b5fb91e36e1eb7d
 </style>
 <html lang="en">
     <jsp:include page="layout/head.jsp"/>
@@ -51,8 +55,12 @@
             </a>
         </div>
 
+<<<<<<< HEAD
 
         <section class="py-5" style="margin-top: -100px;">
+=======
+                <section class="py-5" style="margin-top: -100px;">
+>>>>>>> 1098dc0d320dce49c03b8bcf6b5fb91e36e1eb7d
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <h1 class="display-5 fw-bolder text-center my-5" style="color: white;">${clubId.name}</h1>
@@ -87,27 +95,32 @@
                 align-items: center;
             }
         </style>
+
+
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4">Đáng chú ý</h2>
-                <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="row">
                     <c:forEach items="${listBlogs}" var="blog">
-                        <div class="col">
-                            <div class="card h-100">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
                                 <img src="${blog.imageBlog}" class="card-img-top" alt="Blog Image">
-                                <div class="card-body d-flex flex-column">
+                                <div class="card-body">
                                     <h5 class="card-title">${blog.title}</h5>
-                                    <p class="card-text flex-grow-1">${blog.content}</p>
-                                    <a href="blogclub?blog_id=${blog.blog_id}" class="btn btn-primary mt-auto">Read More</a>
+                                    <p class="card-text">${blog.content}</p>
+                                    <a href="blogclub?blog_id=${blog.blog_id}" class="btn btn-primary">Read More</a>
+
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
+
                 <c:if test="${empty listBlogs}">
                     <p>No blogs found for this club.</p>
                 </c:if>
             </div>
+
         </section>
 
 
@@ -158,17 +171,19 @@
 
 
 
-        <jsp:include page="layout/search.jsp"/>
-
-        <jsp:include page="layout/facebookchat.jsp"/>
 
 
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/tiny-slider.js "></script>
-        <script src="assets/js/tiny-slider-init.js "></script>
-        <script src="assets/js/counter.init.js "></script>
-        <script src="assets/js/feather.min.js"></script>
-        <script src="assets/js/app.js"></script>
-    </body>
+    <jsp:include page="layout/search.jsp"/>
+
+    <jsp:include page="layout/facebookchat.jsp"/>
+
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/tiny-slider.js "></script>
+    <script src="assets/js/tiny-slider-init.js "></script>
+    <script src="assets/js/counter.init.js "></script>
+    <script src="assets/js/feather.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
 
 </html>

@@ -21,7 +21,7 @@ public class BlogDAO {
     public BlogDAO() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            this.conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ClubManagement", "sa", "123");
+            this.conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Club", "sa", "123");
         } catch (Exception e) {
             e.printStackTrace();
         }

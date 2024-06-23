@@ -31,12 +31,13 @@ import model.Setting;
         maxRequestSize = 1024 * 1024 * 100) // 100MB
 public class UserController extends HttpServlet {
 
+    Validate validate = new Validate();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Validate validate = new Validate();
 
         HttpSession session = request.getSession();
         AccountDAO dal = new AccountDAO();
@@ -148,15 +149,15 @@ public class UserController extends HttpServlet {
 
                 // Validate input fields
                 boolean hasErrors = false;
-                if (!validate.checkFullName(name)) {
+                if (!Validate.checkFullName(name)) {
                     request.setAttribute("fullnameError", "Invalid full name. Please enter a valid name.");
                     hasErrors = true;
                 }
-                if (!validate.checkEmail(email)) {
+                if (!Validate.checkEmail(email)) {
                     request.setAttribute("emailError", "Invalid email format. Please enter a valid email.");
                     hasErrors = true;
                 }
-                if (!validate.checkPassword(password)) {
+                if (!Validate.checkPassword(password)) {
                     request.setAttribute("passwordError", "Invalid password. Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a digit.");
                     hasErrors = true;
                 }
@@ -164,7 +165,7 @@ public class UserController extends HttpServlet {
                     request.setAttribute("confirmPasswordError", "Passwords do not match.");
                     hasErrors = true;
                 }
-                if (!validate.checkPhone(rphone)) {
+                if (!Validate.checkPhone(rphone)) {
                     request.setAttribute("phoneNumberError", "Invalid phone number. Please enter a valid 10-digit phone number.");
                     hasErrors = true;
                 }
@@ -246,6 +247,24 @@ public class UserController extends HttpServlet {
                 String phone = request.getParameter("phone");
                 String username = request.getParameter("username");
 
+                boolean hasErrors = false;
+                if (!Validate.checkFullName(fullname)) {
+                    request.setAttribute("fullnameError", "Invalid full name. Please enter a valid name.");
+                    hasErrors = true;
+                }
+                if (!Validate.checkPhone(phone)) {
+                    request.setAttribute("phoneNumberError", "Invalid phone number. Please enter a valid 10-digit phone number.");
+                    hasErrors = true;
+                }
+                if (!Validate.checkUsername(username)) {
+                    request.setAttribute("usernameError", "Invalid user name. Please enter a valid user name.");
+                    hasErrors = true;
+                }
+
+                if (hasErrors) {
+                    request.getRequestDispatcher("profile.jsp").forward(request, response);
+                    return;
+                }
                 Account account = (Account) session.getAttribute("account");
 
                 if (account != null) {
@@ -283,29 +302,46 @@ public class UserController extends HttpServlet {
                 String newPassword = request.getParameter("newpassword");
                 String confirmPassword = request.getParameter("renewpassword");
 
+                boolean hasErrors = false;
+
+                // Validate new password
+                if (!Validate.checkPassword(newPassword)) {
+                    request.setAttribute("passwordError", "Invalid password. Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, and a digit.");
+                    hasErrors = true;
+                }
+
                 Account account = (Account) session.getAttribute("account");
 
                 if (account != null) {
                     String decodedPassword = Encode.deCode(account.getPassword());
-                    if (decodedPassword.equals(oldPassword)) {
-                        if (newPassword.equals(confirmPassword)) {
-                            String encodedNewPassword = Encode.enCode(newPassword);
-                            dal.updatePasswordByEmail(account.getEmail(), encodedNewPassword);
 
-                            account.setPassword(encodedNewPassword);
-                            session.setAttribute("account", account);
-
-                            request.setAttribute("passsuccess", "You have successfully changed your password!");
-                        } else {
-                            request.setAttribute("passerror", "New password does not match!");
-                        }
-                    } else {
+                    // Check if old password is correct
+                    if (!decodedPassword.equals(oldPassword)) {
                         request.setAttribute("passerror", "Old password is incorrect!");
+                        hasErrors = true;
+                    }
+
+                    // Check if new password matches confirm password
+                    if (!newPassword.equals(confirmPassword)) {
+                        request.setAttribute("passerror", "New password does not match!");
+                        hasErrors = true;
+                    }
+
+                    // If no errors, update the password
+                    if (!hasErrors) {
+                        String encodedNewPassword = Encode.enCode(newPassword);
+                        dal.updatePasswordByEmail(account.getEmail(), encodedNewPassword);
+
+                        account.setPassword(encodedNewPassword);
+                        session.setAttribute("account", account);
+
+                        request.setAttribute("passsuccess", "You have successfully changed your password!");
                     }
                 }
 
                 request.getRequestDispatcher("user?action=profile").forward(request, response);
             }
+
         } catch (IOException | ServletException e) {
             System.out.println(e);
         }

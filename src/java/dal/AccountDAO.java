@@ -133,7 +133,7 @@ public class AccountDAO extends DBContext {
 
     public void changePassword(String email, String newPassword) {
         try {
-            String sql = "UPDATE account SET password = ? WHERE email = ?";
+            String sql = "UPDATE [user] SET password = ? WHERE email = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, newPassword);
             statement.setString(2, email);
@@ -145,7 +145,7 @@ public class AccountDAO extends DBContext {
 
     public void changeInformations( String fullname, String username, String phone,int userId) {
         try {
-            String sql = "UPDATE account SET full_name = ?,[user_name] = ?, phone_number = ? WHERE [user_id] = ?";
+            String sql = "UPDATE [user] SET full_name = ?,[user_name] = ?, phone_number = ? WHERE [user_id] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, fullname);
             statement.setString(2, username);
@@ -159,7 +159,7 @@ public class AccountDAO extends DBContext {
 
     public void updatePasswordByEmail(String email, String newPassword) {
         try {
-            String sql = "UPDATE account SET password = ? WHERE email = ?";
+            String sql = "UPDATE [user] SET password = ? WHERE email = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, newPassword);
             statement.setString(2, email);

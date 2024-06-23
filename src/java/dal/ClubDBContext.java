@@ -166,6 +166,7 @@ public class ClubDBContext extends DBContext {
         return 0;
     }
 
+
    public List<Club> search(String keyword) {
     List<Club> list = new ArrayList<>();
     try {
@@ -189,6 +190,8 @@ public class ClubDBContext extends DBContext {
     }
     return list;
 }
+
+   
 
     public static void main(String[] args) {
         ClubDBContext dao = new ClubDBContext();

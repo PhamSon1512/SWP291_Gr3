@@ -1,3 +1,4 @@
+
 package controller.home;
 
 import dal.ClubDAO;
@@ -19,36 +20,37 @@ public class SearchController extends HttpServlet {
         
         String keyword = request.getParameter("keyword");
         
-        // Kiểm tra xem keyword có null hoặc rỗng không
+        // Ki?m tra xem keyword c� null ho?c r?ng kh�ng
         if (keyword == null || keyword.trim().isEmpty()) {
-            request.setAttribute("errorMessage", "Vui lòng nhập từ khóa tìm kiếm.");
+            request.setAttribute("errorMessage", "Vui l?ng nh?p t? kh�a t?m ki?m.");
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
         
-        // Thực hiện tìm kiếm
+        // Th?c hi?n t?m ki?m
         ClubDBContext clubDBContext = new ClubDBContext();
         List<Club> listClubs = clubDBContext.search(keyword.trim());
         
-        // Lấy danh sách categories
+        // L?y danh s�ch categories
         ClubDAO clubDAO = new ClubDAO();
         List<Category> listCategories = clubDAO.getAllCategories();
         
-        // Đặt các thuộc tính
+        // �?t c�c thu?c t�nh
         request.setAttribute("listCategories", listCategories);
         request.setAttribute("listClubs", listClubs);
         request.setAttribute("keyword", keyword);
         
-        // Thêm thông báo kết quả tìm kiếm
+        // Th�m th�ng b�o k?t qu? t?m ki?m
         if (listClubs.isEmpty()) {
-            request.setAttribute("searchMessage", "Không tìm thấy kết quả nào cho '" + keyword + "'.");
+            request.setAttribute("searchMessage", "Kh�ng t?m th?y k?t qu? n�o cho '" + keyword + "'.");
         } else {
-            request.setAttribute("searchMessage", "Tìm thấy " + listClubs.size() + " kết quả cho '" + keyword + "'.");
+            request.setAttribute("searchMessage", "T?m th?y " + listClubs.size() + " k?t qu? cho '" + keyword + "'.");
         }
         
-        // Chuyển hướng đến trang kết quả tìm kiếm
+        // Chuy?n h�?ng �?n trang k?t qu? t?m ki?m
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -56,14 +58,18 @@ public class SearchController extends HttpServlet {
         processRequest(request, response);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+
     @Override
     public String getServletInfo() {
         return "Search Controller for Club search";
     }
 }
+
+
