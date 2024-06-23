@@ -101,4 +101,14 @@
                 }
             };
         </script>
+          <li class="has-submenu">
+                        <a class="sub-menu-item">Club <span class="dropdown-indicator"></span></a>
+                        <ul class="submenu">
+                            <c:forEach items="${listCategories}" var="C">
+                                <li class="list-group-item text-white ${tag == C.category_id ? 'active' : ''} flex-grow-1">
+                                    <a href="categoryclub?categoryId=${C.category_id}" class="d-block">${C.name}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </li>
 </header>
