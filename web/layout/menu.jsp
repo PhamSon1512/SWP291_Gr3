@@ -99,23 +99,16 @@
 
                 <ul class="navigation-menu nav-left nav-light"  >
                     <li class="has-submenu">
-                        <a href="javascript:void(0)" class="sub-menu-item">Club <span class="dropdown-indicator"></span></a>
+                        <a class="sub-menu-item">Club <span class="dropdown-indicator"></span></a>
                         <ul class="submenu">
-                            <li class="has-submenu parent-menu-item">
-                            <li><a href="#" class="sub-menu-item">Music club</a></li>
+                            <c:forEach items="${listCategories}" var="C">
+                                <li class="list-group-item text-white ${tag == C.category_id ? 'active' : ''} flex-grow-1">
+                                    <a href="categoryclub?categoryId=${C.category_id}" class="d-block">${C.name}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </li>
-                    <li><a href="#" class="sub-menu-item">Sport Club</a></li>
-                    <li><a href="#" class="sub-menu-item">Bussiness club</a></li>
-                    <li><a href="#" class="sub-menu-item">English Club</a></li>
-                    <li><a href="#" class="sub-menu-item">Street Workout Club</a></li>
-                    <li><a href="#" class="sub-menu-item">Hebe Club</a></li>
-                    <li><a href="#" class="sub-menu-item"> Basketball Club</a></li>
-                    <li><a href="#" class="sub-menu-item">Chess Club</a></li>
-                    <li><a href="#" class="sub-menu-item">Gymnastic Club</a></li>
-                    <li><a href=#" class="sub-menu-item"> Debate Club</a></li>
-                </ul>
-                </li>
-                <li><a href="blog.jsp" class="sub-menu-item">Blog</a></li>
+                <li><a href="blog" class="sub-menu-item">Blog</a></li>
 
                 <%
                        if (account != null) {

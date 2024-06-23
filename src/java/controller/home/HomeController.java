@@ -5,11 +5,16 @@
  */
 package controller.home;
 
+import dal.ClubDAO;
+import dal.ClubDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Category;
+import model.Club;
 
 /**
  *
@@ -22,6 +27,14 @@ public class HomeController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+        
+        ClubDAO clubDao = new ClubDAO();
+        List<Category> listCategories = clubDao.getAllCategories();
+        request.setAttribute("listCategories", listCategories);
+        ClubDBContext clubDB = new ClubDBContext();
+        List<Club> listClubs = clubDB.getAllClubs();
+        request.setAttribute("listClubs", listClubs);
+        request.getSession().setAttribute("urlHistory", "home");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
