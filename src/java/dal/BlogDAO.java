@@ -12,14 +12,16 @@ import model.Blog;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.BlogOfClub;
 
 public class BlogDAO {
+
     private Connection conn;
 
     public BlogDAO() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            this.conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ClubManagement", "sa", "123");
+            this.conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Club", "sa", "123");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,4 +74,30 @@ public class BlogDAO {
 
         return blog;
     }
+
+  public List<BlogOfClub> getBlogByClubId(int club_id) {
+    List<BlogOfClub> list = new ArrayList<>();
+    String sql = "select blog_id, club_id, title, imageBlog, content from blogofclub WHERE club_id = ?";
+    try {
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, club_id);
+        ResultSet rs = ps.executeQuery();
+
+       while (rs.next()) {
+            BlogOfClub blog = new BlogOfClub();
+            blog.setBlog_id(rs.getInt("blog_id"));
+            blog.setClub_id(rs.getInt("club_id"));
+           blog.setTitle(rs.getString("title"));
+           blog.setImageBlog(rs.getString("imageBlog"));
+            blog.setContent(rs.getString("content"));
+            list.add(blog); // Add each blog to the list
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print the exception (you can log it instead)
+    }
+    return list;
+}
+
+
+   
 }

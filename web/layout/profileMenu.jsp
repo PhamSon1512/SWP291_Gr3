@@ -26,7 +26,7 @@
         </div>
 
         <ul class="list-unstyled sidebar-nav mb-0">
-            <li class="navbar-item">
+            <li class="navbar-item text-center">
                 <c:choose>
                     <c:when test="${sessionScope.account.status == 0}">
                         <a href="dashboard?action=user" class="navbar-link"><i class="ri-airplay-line align-middle navbar-icon"></i>User Dashboard</a>

@@ -38,20 +38,17 @@ public class Validate {
 //        }
 //        return capitalized.toString().trim();
 //    }
-
-   public static boolean checkFullName(String fullname) {
-    String regex = "^[\\p{L} ]+$";
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(fullname);
-    return matcher.matches();
-}
-
+    public static boolean checkFullName(String fullname) {
+        String regex = "^[a-zA-Z\\s]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(fullname);
+        return matcher.matches() && !fullname.trim().isEmpty();
+    }
 
     public static boolean checkPassword(String password) {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+        // Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, and a digit
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+        return password != null && password.matches(regex);
     }
 
 }
