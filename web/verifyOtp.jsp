@@ -1,5 +1,5 @@
 <%-- 
-    Document   : OTPMail
+    Document   : verifyOtp.jsp
     Created on : Jun 6, 2024, 10:18:26 AM
     Author     : sodok
 --%>
@@ -19,39 +19,35 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="text-center mb-4">
-                            <img src="assets/images/bg/fpt.png" alt="FPT Logo" class="img-fluid" style="max-width: 200px;">
-                        </div>
+                        <img src="assets/images/bg/fpt.png" alt="FPT Logo" class="img-fluid" style="max-width: 200px;">
+                    </div>
                     <div class="col-lg-5 col-md-8">
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
 
-                                <p style="color: green; align-content: center;">
-                                    ${requestScope.emailSuccess}
-                                </p>
-                                
                                 <p style="color: red; align-content: center;">
-                                    <c:if test="${errOtp != null}">
-                                        ${requestScope.errOtp}
+                                    <c:if test="${otpError != null}">
+                                        ${requestScope.otpError}
                                     </c:if>
                                 </p>
-                                <form action="ValidateOtp" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
+                                <form action="user?action=verifyOtp" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            
-                                             <div class="mb-3">
-                                                <label class="form-label">Enter OTP in Email : <span class="text-danger">*</span></label>
+
+                                            <div class="mb-3">
+                                                <label for="otp" class="form-label">Enter OTP in Email to verify your account : <span class="text-danger">*</span></label>
                                                 <input type="password" id="password" class="form-control" name="otp" required="">
                                             </div>
-                                            
+
 
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="d-grid">
-                                                <button id="submit" class="btn btn-primary">Xác nhận</button>
+                                                <button id="submit" class="btn btn-primary">Verify</button>
                                             </div>
                                         </div>
-                                        <div class="mx-auto">
-                                            <p class="mb-0 mt-3"><a href="user?action=login" class="text-dark h6 mb-0">Đăng nhập</a></p>
+                                        <div class="col-12 text-center">
+                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Does not received OTP yet?</small> <a href="user?action=resendOtp" class="text-dark fw-bold">Send again</a></p>
                                         </div>
                                     </div>
                                 </form>
@@ -60,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+</div>
         </section>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -69,4 +65,3 @@
     </body>
 
 </html>
-
