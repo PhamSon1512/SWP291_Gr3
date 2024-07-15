@@ -13,17 +13,15 @@ public class Setting {
     private String setting_name;
     private String setting_type;
     private String description;
-    private int status;
 
     public Setting() {
     }
 
-    public Setting(int setting_id, String setting_name, String setting_type, String description, int status) {
+    public Setting(int setting_id, String setting_name, String setting_type, String description) {
         this.setting_id = setting_id;
         this.setting_name = setting_name;
         this.setting_type = setting_type;
         this.description = description;
-        this.status = status;
     }
 
     public int getSetting_id() {
@@ -56,13 +54,5 @@ public class Setting {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }

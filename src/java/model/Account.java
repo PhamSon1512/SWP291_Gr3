@@ -1,9 +1,6 @@
 package model;
 
-/**
- *
- * @author PhamSon
- */
+
 public class Account {
 
     public int user_id;
@@ -16,11 +13,12 @@ public class Account {
     public Setting setting;
     public int status;
     public String note;
+    public boolean verified;
 
     public Account() {
     }
 
-    public Account(int user_id, String fullname, String username, String email, String phone_number, String password, String avatar_url, Setting setting, int status, String note) {
+    public Account(int user_id, String fullname, String username, String email, String phone_number, String password, String avatar_url, Setting setting, int status, String note, boolean verified) {
         this.user_id = user_id;
         this.fullname = fullname;
         this.username = username;
@@ -31,6 +29,7 @@ public class Account {
         this.setting = setting;
         this.status = status;
         this.note = note;
+        this.verified =  verified;
     }
 
     public int getUser_id() {
@@ -111,6 +110,14 @@ public class Account {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     @Override

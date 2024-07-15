@@ -9,20 +9,12 @@
         <servlet-class>controller.home.ForgotPassController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminController</servlet-name>
-        <servlet-class>controller.admin.AdminController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterClub</servlet-name>
         <servlet-class>controller.home.RegisterClubController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ContactController</servlet-name>
         <servlet-class>controller.home.ContactController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ValidateOTP</servlet-name>
-        <servlet-class>config.ValidateOTP</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserController</servlet-name>
@@ -36,6 +28,78 @@
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>controller.admin.DashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoryClubController</servlet-name>
+        <servlet-class>controller.home.CategoryClubController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailController</servlet-name>
+        <servlet-class>controller.home.DetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.home.SearchController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogOfClubDetails</servlet-name>
+        <servlet-class>controller.home.BlogOfClubDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListOfClub</servlet-name>
+        <servlet-class>controller.home.BlogListOfClub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewClubController</servlet-name>
+        <servlet-class>controller.admin.NewClubController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountManager</servlet-name>
+        <servlet-class>controller.admin.AccountManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashBoardManager</servlet-name>
+        <servlet-class>controller.manager.DashBoardManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClubManager</servlet-name>
+        <servlet-class>controller.manager.ClubManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MemberDetailController</servlet-name>
+        <servlet-class>controller.manager.MemberDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserRegisterClub</servlet-name>
+        <servlet-class>controller.home.UserRegisterClub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterClubManager</servlet-name>
+        <servlet-class>controller.manager.RegisterClubManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewRegistrationsServlet</servlet-name>
+        <servlet-class>controller.manager.ViewRegistrationsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AcceptRegistrationServlet</servlet-name>
+        <servlet-class>controller.manager.AcceptRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectRegistrationServlet</servlet-name>
+        <servlet-class>controller.manager.RejectRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeamDetail</servlet-name>
+        <servlet-class>controller.manager.TeamDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToggleMemberStatusController</servlet-name>
+        <servlet-class>controller.manager.ToggleMemberStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostController</servlet-name>
+        <servlet-class>controller.admin.PostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -45,20 +109,12 @@
         <url-pattern>/forgotpass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminController</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RegisterClub</servlet-name>
         <url-pattern>/registerclub</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ContactController</servlet-name>
         <url-pattern>/contact</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ValidateOTP</servlet-name>
-        <url-pattern>/ValidateOtp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -71,5 +127,77 @@
     <servlet-mapping>
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryClubController</servlet-name>
+        <url-pattern>/categoryclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailController</servlet-name>
+        <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogOfClubDetails</servlet-name>
+        <url-pattern>/blogclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListOfClub</servlet-name>
+        <url-pattern>/BlogListOfClub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewClubController</servlet-name>
+        <url-pattern>/newclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountManager</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashBoardManager</servlet-name>
+        <url-pattern>/dashboardmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClubManager</servlet-name>
+        <url-pattern>/clubmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MemberDetailController</servlet-name>
+        <url-pattern>/memberdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserRegisterClub</servlet-name>
+        <url-pattern>/userRegisterClub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterClubManager</servlet-name>
+        <url-pattern>/registerclubmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewRegistrationsServlet</servlet-name>
+        <url-pattern>/ViewRegistrationsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptRegistrationServlet</servlet-name>
+        <url-pattern>/accept</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectRegistrationServlet</servlet-name>
+        <url-pattern>/reject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeamDetail</servlet-name>
+        <url-pattern>/team</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToggleMemberStatusController</servlet-name>
+        <url-pattern>/toggleMemberStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostController</servlet-name>
+        <url-pattern>/post</url-pattern>
     </servlet-mapping>
 </web-app>

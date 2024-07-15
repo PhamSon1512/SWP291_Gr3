@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +25,13 @@
                             <div class="card-body">  
                                 <h4 class="text-center">Login</h4> 
                                 <c:set var="cookie" value="${pageContext.request.cookies}"/>
+                                <c:if test="${not empty param.message}">
+                                    <p style="color: green;">${param.message}</p>
+                                </c:if>
 
                                 <form action="user?action=checklogin" method="POST" onSubmit="document.getElementById('submit').disabled = true;">
                                     <p style="color: red; align-content: center;">
-                                        ${requestScope.loginError}
+                                        ${requestScope.loginError != null ? requestScope.loginError : ''}
                                     </p>
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -51,7 +55,7 @@
                                                 <div class="mb-3">
                                                     <div class="form-check">
                                                         <input class="form-check-input align-middle" type="checkbox" name="remember" id="remember-check">
-                                                        <label class="form-check-label" for="remember-check">Lưu tài khoản</label>
+                                                        <label class="form-check-label" for="remember-check">Save account</label>
                                                     </div>
                                                 </div>
                                                 <a href="user?action=forgotpass" class="text-dark h6 mb-0">Forgot Password ?</a>
@@ -60,7 +64,7 @@
 
                                         <div class="col-lg-12 mb-0">
                                             <div class="d-grid">
-                                                <button class="btn btn-primary" id="submit" type="submit">Đăng nhập</button>
+                                                <button class="btn btn-primary" id="submit" type="submit">Login</button>
                                             </div>
                                         </div>
 

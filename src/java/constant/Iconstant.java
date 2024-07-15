@@ -9,12 +9,12 @@ package constant;
  * @author Admin
  */
 public class Iconstant {
-    public static final String GOOGLE_CLIENT_ID = "754575437351-ll510639upa1os3lpv867iad3n9a1anr.apps.googleusercontent.com";
+    public static final String GOOGLE_CLIENT_ID = "865360912971-nv7vfnk11710fpsnsdi7p71amck9pdio.apps.googleusercontent.com";
 
-    public static final String GOOGLE_CLIENT_SECRET = "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";
+    public static final String GOOGLE_CLIENT_SECRET = "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";
 
     
-    public static final String GOOGLE_REDIRECT_URI = "http://localhost:8080/Iter2/registerclub";
+    public static final String GOOGLE_REDIRECT_URI = "http://localhost:9999/Iter2/logingoogle";
     public static final String GOOGLE_GRANT_TYPE = "authorization_code";
 
     public static final String GOOGLE_LINK_GET_TOKEN = "https://accounts.google.com/o/oauth2/token";

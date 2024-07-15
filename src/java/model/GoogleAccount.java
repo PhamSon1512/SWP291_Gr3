@@ -10,9 +10,9 @@ package model;
  */
 public class GoogleAccount {
 
-    private String id, email, name, first_name, given_name, family_name, picture;
+   private String  id, email, name, first_name, given_name, family_name, picture;
 
-    private boolean verified_email;
+private boolean verified_email;
 
     public GoogleAccount(String id, String email, String name, String first_name, String given_name, String family_name, String picture, boolean verified_email) {
         this.id = id;
@@ -93,5 +93,6 @@ public class GoogleAccount {
     public String toString() {
         return "GoogleAccount{" + "id=" + id + ", email=" + email + ", name=" + name + ", first_name=" + first_name + ", given_name=" + given_name + ", family_name=" + family_name + ", picture=" + picture + ", verified_email=" + verified_email + '}';
     }
-    
+
+   
 }

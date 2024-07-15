@@ -1,9 +1,3 @@
-<%-- 
-    Document   : registerclub
-    Created on : May 27, 2024, 8:10:10 AM
-    Author     : sodok
---%>
-
 <%@page import="model.Account, dal.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,7 +11,6 @@
         <jsp:include page="layout/preloader.jsp"/>
         <jsp:include page="layout/menu.jsp"/>
 
-
         <section class="bg-half-260 d-table w-100" style="background: url('assets/images/bg/logo.jpg') center;">
             <div class="bg-overlay bg-overlay-"></div>
             <div class="container">
@@ -26,13 +19,13 @@
                         <div class="heading-title">
                             <img src="assets/images/bg/fpt.png" height="50" alt="">
                             <h4 class="display-4 fw-bold text-white title- mt-3 mb-4">Simplifying <br> Club Management</h4>
-                            <p class="para-desc text-white-50 mb-0">Our club management website makes organizing and managing school clubs easy. With tools for event planning and member management, students and teachers can connect and work efficiently.   </p>
+                            <p class="para-desc text-white-50 mb-0">Our club management website makes organizing and managing school clubs easy. With tools for event planning and member management, students and teachers can connect and work efficiently.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
- 
+
         <section class="section">
             <div class="container">
                 <h2 class="mb-0">Register Club</h2>
@@ -45,7 +38,7 @@
                                     if (session.getAttribute("account") != null) {
                                         account = (Account) session.getAttribute("account");
                                     }
-                                %>            
+                                %>
                                 <% if (account != null) { %>
                                 <form action="registerclub" method="POST">
                                     <div class="row">
@@ -53,44 +46,42 @@
                                             <h4 class="mb-0">Profile</h4>
                                         </div>
                                         <br><br>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Name<span class="text-danger">*</span></label>
-                                                <input class="form-control" value="<%= account.getFullname() %>" readonly="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Telephone<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" value="<%= account.getPhone_number() %>" readonly="">
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Email<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" value="<%= account.getEmail() %>">
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
                                         <br>
                                         <% } %>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Club List<span class="text-danger">*</span></label>
-                                                <select name="clublist" oninvalid="Select(this);" oninput="Select(this);" id="mySelect" class="form-control department-name select2input">
-
-                                                    <option value="Music Club">Music Club</option>
-                                                    <option value="Sport Club">Sport Club</option>
-                                                    <option value="Business Club">Business Club</option>
-                                                    <option value="English Club">English Club</option>
-                                                    <option value="Street Workout Club">Street Workout Club</option>
-                                                    <option value="Hebe Club">Hebe Club</option>
-                                                    <option value="Baskeball Club">Baskeball Club</option>
-                                                    <option value="Chess Club">Chess Club</option>
-                                                    <option value="Gymnastic Club">Gymnastic Club</option>
-                                                    <option value="Debate Club">Debate Club</option>
+                                                <label class="form-label">Club Categories</label>
+                                                <select class="form-control" id="category-select">
+                                                    <c:forEach items="${listCategories}" var="C">
+                                                        <option value="${C.category_id}">${C.name}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
+                                        <c:forEach items="${listClubs}" var="P">
+                                            <div class="col-md-4 mb-5">
+                                                <div class="card h-100 shadow-sm">
+
+                                                    <div class="card-body text-center">
+                                                        <h5 class="fw-bolder">${P.name}</h5>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </c:forEach>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Purpose of participation<span class="text-danger">*</span></label>
@@ -117,35 +108,17 @@
                                                 </select>
                                             </div>
                                         </div>
-
-
-
-                                        <script>
-                                            function toggleCustomPurposeInput() {
-                                                var selectElement = document.getElementById('purpose-select');
-                                                var customPurposeInput = document.getElementById('custom-purpose');
-                                                if (selectElement.value === 'Other') {
-                                                    customPurposeInput.style.display = 'block';
-                                                } else {
-                                                    customPurposeInput.style.display = 'none';
-                                                }
-                                            }
-                                        </script>
-                                        <!--end col-->
-
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Introduce Yourself<span class="text-danger">*</span></label>
                                                 <textarea required="" name="description" id="comments2" rows="4" class="form-control"></textarea>
                                             </div>
-                                        </div><!--end col-->
+                                        </div>
                                         <button type="submit" class="btn btn-primary">Register</button>
                                 </form>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </section>
@@ -160,69 +133,19 @@
         <script src="assets/js/flatpickr.init.js"></script>
         <script src="assets/js/select2.min.js"></script>
         <script src="assets/js/select2.init.js"></script>
-        <script src="assets/js/jquery.timepicker.min.js"></script> 
+        <script src="assets/js/jquery.timepicker.min.js"></script>
         <script src="assets/js/timepicker.init.js"></script>
         <script src="assets/js/feather.min.js"></script>
         <script src="assets/js/vn.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/sweetalert.min.js"></script>
-        <script>
-            $("#checkin-date").flatpickr({
-                defaultDate: "today",
-                minDate: "today",
-                maxDate: new Date().fp_incr(14),
-                dateFormat: "d/m/Y",
-                locale: "vn"
+
+        <c:if test="${not empty successMessage}">
+            <script>
+            $(document).ready(function () {
+                swal("Success", "${successMessage}", "success");
             });
-            function Select(text) {
-                if (text.value == "") {
-                    $(".default").hide();
-                    $(".vnpay").hide();
-                } else if (text.value == "default") {
-                    $(".default").show();
-                    $(".vnpay").hide();
-                } else if (text.value == "vnpay") {
-                    $(".vnpay").show();
-                    $(".default").hide();
-                } else {
-                    $(".default").hide();
-                    $(".vnpay").hide();
-                }
-            }
-            $(document).ready(jQuery(function () {
-                jQuery(".default").click(function (e) {
-                    e.preventDefault();
-                    var form = $(this).parents('form');
-                    swal({
-                        title: "Xác nhận",
-                        text: "Bạn có chắc chắn muốn khởi tạo lịch hẹn này ?",
-                        buttons: ["Hủy bỏ", "Đồng ý"],
-                    })
-                            .then((cofirm) => {
-                                if (cofirm) {
-                                    form.submit();
-                                }
-                            })
-                });
-            }));
-            $(document).ready(jQuery(function () {
-                jQuery(".vnpay").click(function (e) {
-                    e.preventDefault();
-                    var form = $(this).parents('form');
-                    swal({
-                        title: "Xác nhận",
-                        text: "Bạn có chắc chắn muốn thanh toán ?",
-                        buttons: ["Hủy bỏ", "Đồng ý"],
-                    })
-                            .then((cofirm) => {
-                                if (cofirm) {
-                                    form.submit();
-                                }
-                            })
-                });
-            }));
-        </script>
-
+            </script>
+        </c:if>
     </body>
-
 </html>

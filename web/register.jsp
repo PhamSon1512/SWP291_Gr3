@@ -63,15 +63,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Phone Number" name="phoneNumber" id="phoneNumber" value="<%= request.getAttribute("phoneNumber") != null ? request.getAttribute("phoneNumber") : "" %>">
-                                                <div id="phoneNumberError" class="text-danger">
-                                                    <%= request.getAttribute("phoneNumberError") != null ? request.getAttribute("phoneNumberError") : "" %>
-                                                </div>
-                                            </div>
-                                        </div>
+                                  
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
@@ -108,8 +100,10 @@
                                         <div class="col-12 mt-8">
                                             <div class="d-grid">    
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email 
-                                                   profile openid &redirect_uri=http://localhost:8080/Iter2/registerclub&response_type=code &client_id=754575437351-ll510639upa1os3lpv867iad3n9a1anr.apps.googleusercontent.com&approval_prompt=force" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
+                                                   profile openid &redirect_uri=http://localhost:9999/Iter2/logingoogle&response_type=code
+                                                   &client_id=865360912971-nv7vfnk11710fpsnsdi7p71amck9pdio.apps.googleusercontent.com" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
                                             </div>
+                                           
                                         </div>
                                         <div class="col-12 text-center">
                                             <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="user?action=login" class="text-dark fw-bold">Sign in</a></p>

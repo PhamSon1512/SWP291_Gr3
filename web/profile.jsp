@@ -130,40 +130,50 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Full Name<span class="text-danger">*</span></label>
-                                                <input name="fullname" id="fullName" value="<%= account.getFullname() %>" type="text" class="form-control">
+                                                <input name="fullname" id="fullName" value="${requestScope.fullname != null ? requestScope.fullname : account.fullname}" type="text" class="form-control">
                                                 <div id="fullnameError" class="text-danger">
                                                     <%= request.getAttribute("fullnameError") != null ? request.getAttribute("fullnameError") : "" %>
                                                 </div>
                                             </div>
                                         </div>
-                                            
-                                        <div class="col-md-6">
-                                            <div class="mb-4">
-                                                <label class="form-label">Username<span class="text-danger">*</span></label>
-                                                <input name="phone" oninvalid="CheckPhone(this);" oninput="CheckPhone(this);" value="<%= account.getUsername() %>" id="number" type="text" class="form-control">
-                                            </div>                                                                               
-                                        </div>
 
                                         <div class="col-md-6">
                                             <div class="mb-4">
-                                                <label class="form-label">Email<span class="text-danger">*</span></label>
-                                                <input name="email" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" value="<%= account.getEmail() %>" id="email" type="email" class="form-control">
-                                            </div>
+                                                <label class="form-label">Username<span class="text-danger">*</span></label>
+                                                <input name="username" value="${requestScope.username != null ? requestScope.username : account.username}" id="username" type="text" class="form-control">
+                                                <div id="usernameError" class="text-danger">
+                                                    <%= request.getAttribute("usernameError") != null ? request.getAttribute("usernameError") : "" %>
+                                                </div>
+                                            </div>                                                                               
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Phone Number<span class="text-danger">*</span></label>
-                                                <input name="phone" oninvalid="CheckPhone(this);" oninput="CheckPhone(this);" value="<%= account.getPhone_number() %>" id="number" type="text" class="form-control">
+                                                <input name="phone" value="${requestScope.phone != null ? requestScope.phone : account.phone_number}" id="number" type="text" class="form-control">
+                                                <div id="phoneNumberError" class="text-danger">
+                                                    <%= request.getAttribute("phoneNumberError") != null ? request.getAttribute("phoneNumberError") : "" %>
+                                                </div>
                                             </div>                                                                               
                                         </div>
-                                            
+
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Role<span class="text-danger">*</span></label>
-                                                <input name="username"  value="<%= account.getStatus() %>" type="text" class="form-control">
+                                                <c:choose>
+                                                    <c:when test="${account.getStatus() == 0}">
+                                                        <input name="role" value="User" id="role" type="text" class="form-control" readonly>
+                                                    </c:when>
+                                                    <c:when test="${account.getStatus() == 1}">
+                                                        <input name="role" value="Admin" id="role" type="text" class="form-control" readonly>
+                                                    </c:when>
+                                                    <c:when test="${account.getStatus() == 2}">
+                                                        <input name="role" value="Manager" id="role" type="text" class="form-control" readonly>
+                                                    </c:when>
+                                                </c:choose>
                                             </div>                                                                               
                                         </div>
+
                                     </div>        
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -176,7 +186,7 @@
 
                         <div id="changePasswordSection" class="rounded shadow mt-4">
                             <div class="p-4 border-bottom">
-                                <h5 class="mb-0">Đổi mật khẩu :</h5>
+                                <h5 class="mb-0">Change Password :</h5>
                                 <p style="color: red; align-content: center;">
                                     ${requestScope.passerror}
                                 </p>
@@ -190,81 +200,81 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Mật khẩu cũ :<span class="text-danger">*</span></label>
-                                                <input value="${oldpassword}" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" type="password"  name="oldpassword" class="form-control" required="">
+                                                <label class="form-label">Old Password :<span class="text-danger">*</span></label>
+                                                <input value="${oldPassword}" type="password"  name="oldpassword" class="form-control" required="">
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Mật khẩu mới :<span class="text-danger">*</span></label>
-                                                <input value="${newpassword}" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" id="password" type="password" name="newpassword" class="form-control" required="">
+                                                <label class="form-label">New Password :<span class="text-danger">*</span></label>
+                                                <input value="${newPassword}" id="password" type="password" name="newpassword" class="form-control" required="">
+                                                <div id="passwordError" class="text-danger">
+                                                    ${requestScope.passwordError}
+                                                </div>
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Nhập lại mật khẩu :<span class="text-danger">*</span></label>
-                                                <input value="${renewpassword}" oninvalid="CheckRePassword(this);" oninput="CheckRePassword(this);"type="password" name="renewpassword" class="form-control" required="">
+                                                <label class="form-label">Confirm New Password :<span class="text-danger">*</span></label>
+                                                <input value="${confirmPass}" type="password" name="renewpassword" class="form-control" required="">
                                             </div>
                                         </div>
                                         <!--end col-->
                                         <div class="col-lg-12 mt-2 mb-0">
-                                            <button class="btn btn-primary">Thay đổi</button>
+                                            <button class="btn btn-primary">Changes</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <% } else {
-        response.sendRedirect("401.jsp");
-        }
-        %>
+                        </section>  
+                        <% } else {
+                        response.sendRedirect("401.jsp");
+                        }
+                        %>
 
-        <jsp:include page="layout/footer.jsp"/>
-        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
-            <jsp:include page="layout/search.jsp"/>
+                        <jsp:include page="layout/footer.jsp"/>
+                        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
 
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/feather.min.js"></script>
-        <script src="assets/js/app.js"></script>
-        <script>
-            function readURL(input, thumbimage) {
-                if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $("#thumbimage").attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                } else { // Sử dụng cho IE
-                    $("#thumbimage").attr('src', input.value);
+                        <script src="assets/js/bootstrap.bundle.min.js"></script>
+                        <script src="assets/js/feather.min.js"></script>
+                        <script src="assets/js/app.js"></script>
+                        <script>
+                            function readURL(input, thumbimage) {
+                                if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        $("#thumbimage").attr('src', e.target.result);
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                } else { // Sử dụng cho IE
+                                    $("#thumbimage").attr('src', input.value);
+                                }
+                                $("#thumbimage").show();
+                                $('.filename').text($("#uploadfile").val());
+                                $(".Choicefile").hide();
+                                $(".Update").show();
+                                $(".removeimg").show();
+                            }
 
-                }
-                $("#thumbimage").show();
-                $('.filename').text($("#uploadfile").val());
-                $(".Choicefile").hide();
-                $(".Update").show();
-                $(".removeimg").show();
-            }
-            $(document).ready(function () {
-                $(".Choicefile").bind('click', function () {
-                    $("#uploadfile").click();
+                            $(document).ready(function () {
+                                $(".Choicefile").bind('click', function () {
+                                    $("#uploadfile").click();
+                                });
 
-                });
-                $(".removeimg").click(function () {
-                    $("#thumbimage").attr('src', '').hide();
-                    $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
-                    $(".removeimg").hide();
-                    $(".Choicefile").show();
-                    $(".Update").hide();
-                    $(".filename").text("");
-                });
-            })
-        </script>
-    </body>
+                                $(".removeimg").click(function () {
+                                    $("#thumbimage").attr('src', '').hide();
+                                    $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+                                    $(".removeimg").hide();
+                                    $(".Choicefile").show();
+                                    $(".Update").hide();
+                                    $(".filename").text("");
+                                });
+                            });
+                        </script>
 
-</html>
+                        </body>
+
+                        </html>
